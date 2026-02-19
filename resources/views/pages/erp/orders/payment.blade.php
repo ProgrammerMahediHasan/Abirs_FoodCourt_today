@@ -137,11 +137,8 @@ Welcome to Abir's FoodCourt
     const methodCards = document.querySelectorAll('.method-card');
     const methodInput = document.getElementById('payment_method');
     const extra = document.getElementById('paymentExtraFields');
-<<<<<<< HEAD
     const gatewayCards = document.querySelectorAll('.gateway-card');
     const onlineGatewayInput = document.getElementById('online_gateway');
-=======
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
 
     function selectMethod(m) {
         methodCards.forEach(c => c.classList.remove('active'));
@@ -152,7 +149,6 @@ Welcome to Abir's FoodCourt
         extra.querySelectorAll('[data-method]').forEach(el => {
             el.style.display = (el.getAttribute('data-method') === m) ? '' : 'none';
         });
-<<<<<<< HEAD
         if (m === 'online') {
             const current = onlineGatewayInput ? onlineGatewayInput.value : 'card';
             gatewayCards.forEach(gc => gc.classList.remove('active'));
@@ -177,10 +173,3 @@ Welcome to Abir's FoodCourt
 .gateway-label{font-weight:600;font-size:13px;color:#000;}
 </style>
 @endsection
-=======
-    }
-    methodCards.forEach(c => c.addEventListener('click', () => selectMethod(c.getAttribute('data-method'))));
-    selectMethod(methodInput.value || 'cash');
-</script>
-@endsection
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87

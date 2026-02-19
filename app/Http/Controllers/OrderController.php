@@ -49,12 +49,7 @@ class OrderController extends Controller
         if (Schema::hasTable('restaurant_tables')) {
             $tables = RestaurantTable::where('status', 'available')->orderBy('name')->get();
         }
-
-<<<<<<< HEAD
         return view('pages.erp.orders.create', compact('customers', 'restaurants', 'menus', 'tables'));
-=======
-        return view('pages.erp.orders.create', compact('customers', 'restaurants', 'menus'));
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
     }
 
     // STORE ORDER (PENDING)
@@ -64,10 +59,7 @@ class OrderController extends Controller
             'customer_id' => 'nullable|exists:customers,id',
             'restaurant_id' => 'required|exists:restaurants,id',
             'order_type' => 'required|in:dine_in,takeaway,delivery',
-<<<<<<< HEAD
             'table_id' => 'nullable|exists:restaurant_tables,id',
-=======
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
             'menu_ids' => 'required|array|min:1',
             'menu_ids.*' => 'exists:menus,id',
             'quantities' => 'required|array|min:1',
@@ -78,23 +70,16 @@ class OrderController extends Controller
 
         DB::beginTransaction();
         try {
-<<<<<<< HEAD
             // If dine-in with a selected table, ensure table is available
             if ($request->order_type === 'dine_in' && $request->filled('table_id') && Schema::hasTable('restaurant_tables')) {
                 $table = RestaurantTable::lockForUpdate()->findOrFail($request->table_id);
                 if ($table->status !== 'available') throw new \Exception("Selected table is not available.");
             }
-
-=======
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
             $order = Order::create([
                 'order_no' => 'ORD-' . time(),
                 'customer_id' => $request->customer_id,
                 'restaurant_id' => $request->restaurant_id,
-<<<<<<< HEAD
                 'table_id' => $request->order_type === 'dine_in' ? $request->input('table_id') : null,
-=======
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
                 'order_type' => $request->order_type,
                 'status' => 'pending',
                 'subtotal' => 0,
@@ -107,10 +92,6 @@ class OrderController extends Controller
             foreach ($request->menu_ids as $i => $menuId) {
                 $menu = Menu::with('stock')->findOrFail($menuId);
                 $quantity = $request->quantities[$i];
-<<<<<<< HEAD
-=======
-                if ($menu->stock->current_quantity < $quantity) throw new \Exception("Not enough stock for {$menu->name}");
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
                 $lineTotal = $menu->price * $quantity;
 
                 OrderItem::create([
@@ -121,11 +102,7 @@ class OrderController extends Controller
                     'total_price' => $lineTotal,
                 ]);
 
-<<<<<<< HEAD
                 // Stock will be decremented only after successful payment
-=======
-                $menu->stock->decrement('current_quantity', $quantity);
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
                 $subtotal += $lineTotal;
             }
 
@@ -145,13 +122,10 @@ class OrderController extends Controller
                 'discount' => $discount,
                 'total' => $total,
             ]);
-<<<<<<< HEAD
             // Mark table occupied immediately for dine-in with a table selected
             if ($order->order_type === 'dine_in' && $order->table_id && Schema::hasTable('restaurant_tables')) {
                 RestaurantTable::where('id', $order->table_id)->update(['status' => 'occupied']);
             }
-=======
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
             DB::commit();
             return redirect()->route('orders.index')->with('success', 'Order placed successfully');
         } catch (\Exception $e) {
@@ -200,7 +174,6 @@ class OrderController extends Controller
             'payment_method' => 'required|in:cash,bank,cod,online',
         ]);
 
-<<<<<<< HEAD
         if ($request->payment_method === 'online') {
             $request->validate([
                 'online_gateway' => 'required|in:card,bkash,nagad,rocket',
@@ -228,12 +201,6 @@ class OrderController extends Controller
                 }
             }
         });
-=======
-        $order->update([
-            'payment_status' => 'paid',
-            'payment_method' => $request->payment_method,
-        ]);
->>>>>>> 61767df240e155b1a57b3b2a6192c15c2442ed87
 
         return redirect()->route('orders.edit', $order->id)
             ->with('success', 'Payment completed. Please mark as delivered.');
