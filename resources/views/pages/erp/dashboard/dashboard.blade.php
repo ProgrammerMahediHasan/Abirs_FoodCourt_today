@@ -44,7 +44,12 @@ $completionRate = $completionRate ?? 0;
     <div class="dashboard-header mb-5">
         <div class="d-flex justify-content-between align-items-start">
             <div>
+                @php $isAdmin = auth()->check() && ( (auth()->user()->role ?? null) === 'Admin' || (method_exists(auth()->user(),'hasRole') && auth()->user()->hasRole('Admin')) ); @endphp
+                @if($isAdmin)
+                <h1 class="page-title mb-2">Welcome to Admin Dashboard</h1>
+                @else
                 <h1 class="page-title mb-2">Welcome to Abir's FoodCourt</h1>
+                @endif
                 <p class="page-subtitle text-muted">
                     <i class="fas fa-calendar-alt me-2"></i>
                     {{ \Carbon\Carbon::now('Asia/Dhaka')->format('l, F d, Y') }}
@@ -394,9 +399,9 @@ $completionRate = $completionRate ?? 0;
                     'confirmed' => ['bg' => 'primary', 'text' => 'primary'],
                     'preparing' => ['bg' => 'info', 'text' => 'info'],
                     'ready' => ['bg' => 'success', 'text' => 'success'],
+                    'approved' => ['bg' => 'purple', 'text' => 'purple'],
                     'delivered' => ['bg' => 'dark', 'text' => 'dark'],
                     'cancelled' => ['bg' => 'danger', 'text' => 'danger'],
-                    'paid' => ['bg' => 'purple', 'text' => 'purple']
                     ];
                     $status = $order->status;
                     $color = $statusColors[$status] ?? ['bg' => 'secondary', 'text' => 'secondary'];
@@ -428,6 +433,27 @@ $completionRate = $completionRate ?? 0;
                 <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-sm btn-success ms-2">
                     <i class="fas fa-check me-1"></i>Confirm
                 </a>
+                @endif
+                @if($order->status == 'ready')
+                @can('orders.approve')
+                <form method="POST" action="{{ route('orders.approve', $order->id) }}" class="d-inline ms-2">
+                    @method('PATCH') @csrf
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        <i class="fas fa-thumbs-up me-1"></i>Approve
+                    </button>
+                </form>
+                @endcan
+                @endif
+                @php $canCancel = in_array($order->status, ['pending','confirmed','preparing']); @endphp
+                @if($canCancel)
+                @role('Admin|Manager')
+                <form method="POST" action="{{ route('orders.cancel', $order->id) }}" class="d-inline ms-2">
+                    @method('PATCH') @csrf
+                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-times me-1"></i>Cancel
+                    </button>
+                </form>
+                @endrole
                 @endif
             </div>
         </div>

@@ -20,6 +20,7 @@
             font-family: 'Poppins', sans-serif;
             background-color: #fff;
             overflow-x: hidden;
+            overflow-y: hidden;
         }
 
         .container {
@@ -30,7 +31,8 @@
 
         /* --- LEFT SIDE: WIDE IMAGE AREA --- */
         .left-side {
-            flex: 1.5;
+            position: relative;
+            flex: 1.4;
             height: 100vh;
             background-color: #f8f8f8;
             overflow: hidden;
@@ -44,6 +46,15 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            object-position: center;
+        }
+
+        .left-side::after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.12));
+            pointer-events:none;
         }
 
         /* --- RIGHT SIDE: REGISTER FORM --- */
@@ -53,14 +64,15 @@
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
-            padding: 40px;
+            padding: 28px;
             box-shadow: -5px 0 20px rgba(0,0,0,0.05);
             z-index: 10;
         }
 
         .auth-wrapper {
             width: 100%;
-            max-width: 380px;
+            max-width: 360px;
+            position: relative;
         }
 
         .brand-logo {
@@ -71,9 +83,9 @@
         .brand-logo h1 {
             font-family: 'Poppins', sans-serif;
             color: #222;
-            font-size: 30px;
+            font-size: 26px;
             font-weight: 800;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             letter-spacing: -1px;
         }
 
@@ -83,19 +95,23 @@
 
         /* Success Message Styling */
         .alert-success {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             background-color: #d4edda;
             color: #155724;
-            padding: 12px;
+            padding: 10px 12px;
             border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            text-align: center;
+            font-size: 13px;
+            text-align: left;
             border: 1px solid #c3e6cb;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
         }
 
         /* Form Styling */
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .form-group label {
@@ -106,12 +122,12 @@
             margin-bottom: 6px;
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 16px;
             border: 2px solid #f1f1f1;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: 8px;
+            font-size: 14px;
             font-family: inherit;
             outline: none;
             transition: 0.3s;
@@ -126,12 +142,12 @@
 
         .register-btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             border: none;
             border-radius: 10px;
             background: linear-gradient(90deg, #ff7f50, #ff6333);
             color: #fff;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
@@ -158,8 +174,23 @@
         }
 
         @media (max-width: 900px) {
-            .left-side { display: none; }
-            .right-side { flex: 1; height: 100vh; }
+            .left-side { flex: 1; height: 100vh; }
+            .right-side { flex: 1.2; height: 100vh; }
+        }
+        @media (max-height: 800px) {
+            .brand-logo h1 { font-size: 24px; }
+            .auth-wrapper { max-width: 340px; }
+            .form-group input, .form-group select { padding: 11px 14px; font-size: 13.5px; }
+            .register-btn { padding: 13px; font-size: 14.5px; }
+            .right-side { padding: 24px; }
+        }
+        @media (max-height: 700px) {
+            .brand-logo h1 { font-size: 22px; }
+            .auth-wrapper { max-width: 330px; }
+            .form-group { margin-bottom: 10px; }
+            .form-group input, .form-group select { padding: 10px 12px; font-size: 13px; border-radius: 7px; }
+            .register-btn { padding: 12px; font-size: 14px; }
+            .right-side { padding: 20px; }
         }
     </style>
 </head>
@@ -180,9 +211,7 @@
                 </div>
 
                 @if (session('status'))
-                    <div class="alert-success">
-                        {{ session('status') }}
-                    </div>
+                    <div id="reg-success" class="alert-success">{{ session('status') }}</div>
                 @endif
 
                 <form method="POST" action="{{ route('register') }}">
@@ -205,6 +234,20 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Role</label>
+                        <select name="role" required style="width:100%;padding:14px 18px;border:2px solid #f1f1f1;border-radius:10px;background:#fafafa;">
+                            <option value="">Select role</option>
+                            <option value="Admin" {{ old('role')=='Admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="Manager" {{ old('role')=='Manager' ? 'selected' : '' }}>Manager</option>
+                            <option value="Cashier" {{ old('role')=='Cashier' ? 'selected' : '' }}>Cashier</option>
+                            <option value="Kitchen Staff" {{ old('role')=='Kitchen Staff' ? 'selected' : '' }}>Kitchen Staff</option>
+                        </select>
+                        @error('role')
+                            <span style="color:red; font-size:12px;">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label>Password</label>
                         <input type="password" name="password" placeholder="Create password" required>
                         @error('password')
@@ -219,6 +262,11 @@
 
                     <button type="submit" class="register-btn">CREATE ACCOUNT</button>
                 </form>
+                @if (session('status'))
+                <script>
+                    setTimeout(function(){ var el=document.getElementById('reg-success'); if(el){ el.style.opacity='0'; setTimeout(function(){ el.remove(); },300); } }, 2500);
+                </script>
+                @endif
 
                 <div class="auth-footer">
                     Already have an account? <a href="{{ route('login') }}">Login here</a>

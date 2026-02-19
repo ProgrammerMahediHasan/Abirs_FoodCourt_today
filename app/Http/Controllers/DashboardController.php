@@ -19,8 +19,18 @@ class DashboardController extends Controller
      */
    public function index()
 {
-    // Debug: লগ করা
-    \Log::info('Dashboard Controller called');
+    if (auth()->check()) {
+        $u = auth()->user();
+        if (($u->role ?? null) === 'Kitchen Staff' || (method_exists($u,'hasRole') && $u->hasRole('Kitchen Staff'))) {
+            return redirect()->route('kitchen.dashboard');
+        }
+        if (($u->role ?? null) === 'Manager' || (method_exists($u,'hasRole') && $u->hasRole('Manager'))) {
+            return redirect()->route('manager.dashboard');
+        }
+        if (($u->role ?? null) === 'Cashier' || (method_exists($u,'hasRole') && $u->hasRole('Cashier'))) {
+            return redirect()->route('cashier.dashboard');
+        }
+    }
 
     try {
         // Order Statistics

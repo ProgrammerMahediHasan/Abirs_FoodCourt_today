@@ -32,23 +32,20 @@ Welcome to Abir's FoodCourt
     <p><strong>Subtotal:</strong> ৳{{ number_format($order->subtotal,2) }}</p>
     <p><strong>Total:</strong> ৳{{ number_format($order->total,2) }}</p>
 
+    @unlessrole('Cashier')
     <form method="POST" action="{{ route('orders.confirm', $order->id) }}" onsubmit="return confirm('Approve and confirm this order?');">
         @csrf
         @method('PATCH')
         <button type="submit" class="btn btn-success">Confirm Order</button>
     </form>
+    @endunlessrole
 
-    @if($order->status == 'confirmed' && $order->payment_status !== 'paid')
+    @if($order->status == 'approved' && $order->payment_status !== 'paid')
+        @can('manage.payment')
         <a href="{{ route('orders.payment.form', $order->id) }}" class="btn btn-warning mt-3">Make Payment</a>
+        @endcan
     @endif
 
-    @if($order->status == 'confirmed' && $order->payment_status === 'paid')
-        <form method="POST" action="{{ route('orders.status', $order->id) }}" class="d-inline">
-            @csrf
-            @method('PATCH')
-            <input type="hidden" name="status" value="delivered">
-            <button type="submit" class="btn btn-info mt-3">Mark as Delivered</button>
-        </form>
-    @endif
+    {{-- After payment, delivered handled automatically --}}
 </div>
 @endsection

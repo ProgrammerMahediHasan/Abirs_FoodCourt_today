@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -41,7 +42,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('guest');
+        $this->middleware('guest');
     }
 
     /**
@@ -56,6 +57,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string', 'in:Admin,Manager,Cashier,Kitchen Staff'],
         ]);
     }
 
@@ -70,6 +72,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'role' => $data['role'] ?? null,
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -85,21 +88,14 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-
-        if (!Auth::check()) {
-            $this->guard()->login($user);
+        if (!empty($request->role)) {
+            try {
+                $user->assignRole($request->role);
+            } catch (\Throwable $e) {
+                \Log::error('AssignRole failed: '.$e->getMessage());
+            }
         }
 
-        if ($response = $this->registered($request, $user)) {
-            return $response;
-        }
-
-        if (Auth::check()) {
-            return redirect()->route('register')->with('status', 'User registered successfully!');
-        }
-
-        return $request->wantsJson()
-            ? new JsonResponse([], 201)
-            : redirect($this->redirectPath());
+        return redirect()->route('register')->with('status', 'User registered successfully!');
     }
 }

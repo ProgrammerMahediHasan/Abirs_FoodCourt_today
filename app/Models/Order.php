@@ -291,7 +291,7 @@ class Order extends Model
      */
     public function changeStatus(string $newStatus): bool
     {
-        $validStatuses = ['pending', 'confirmed', 'preparing', 'ready', 'delivered', 'cancelled'];
+        $validStatuses = ['pending', 'confirmed', 'preparing', 'ready', 'approved', 'delivered', 'cancelled'];
 
         if (!in_array($newStatus, $validStatuses)) {
             return false;

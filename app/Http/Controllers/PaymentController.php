@@ -9,8 +9,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        // Only confirmed orders
-        $orders = Order::where('status', 'confirmed')->orderBy('ordered_at', 'desc')->get();
+        $orders = Order::where('status', 'approved')->orderBy('ordered_at', 'desc')->get();
 
         return view('pages.erp.payments.index', compact('orders'));
     }

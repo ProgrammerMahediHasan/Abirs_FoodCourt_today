@@ -49,14 +49,14 @@ Welcome to Abir's FoodCourt
                             <span class="badge {{ $badgeClass }}">{{ ucfirst($table->status) }}</span>
                         </td>
                         <td class="text-center">
-                            <a href="{{ route('tables.edit', $table->id) }}" class="btn btn-sm btn-outline-secondary">
-                                Edit
+                            <a href="{{ route('tables.edit', $table->id) }}" class="btn btn-sm btn-outline-secondary" title="Edit">
+                                <i class="fas fa-edit"></i>
                             </a>
                             <form action="{{ route('tables.destroy', $table->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this table?')">
-                                    Delete
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this table?')" title="Delete">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </form>
                         </td>

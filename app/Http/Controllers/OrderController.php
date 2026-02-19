@@ -163,7 +163,7 @@ class OrderController extends Controller
     // PAYMENT FORM (after order confirmed)
     public function makePaymentForm(Order $order)
     {
-        if ($order->status != 'confirmed') return back()->withErrors('Order must be confirmed before payment.');
+        if ($order->status != 'approved') return back()->withErrors('Order must be approved before payment.');
         return view('pages.erp.orders.payment', compact('order'));
     }
 
@@ -202,14 +202,24 @@ class OrderController extends Controller
             }
         });
 
+        $order->refresh();
+        if ($order->payment_status === 'paid' && $order->status !== 'delivered') {
+            $invoiceToken = 'INV-' . now()->format('Ymd') . '-' . Str::upper(Str::random(5));
+            $order->update(['status' => 'delivered', 'invoice_token' => $invoiceToken]);
+            if ($order->order_type === 'dine_in' && $order->table_id && Schema::hasTable('restaurant_tables')) {
+                RestaurantTable::where('id', $order->table_id)->update(['status' => 'available']);
+            }
+            return redirect()->route('orders.invoice', $order->id)
+                ->with('success', 'Payment done. Order delivered and invoice generated.');
+        }
         return redirect()->route('orders.edit', $order->id)
-            ->with('success', 'Payment completed. Please mark as delivered.');
+            ->with('success', 'Payment completed.');
     }
 
     public function changeStatus(Request $request, Order $order)
     {
         $request->validate([
-            'status' => 'required|in:pending,confirmed,preparing,ready,delivered,cancelled'
+            'status' => 'required|in:pending,confirmed,preparing,ready,approved,delivered,cancelled'
         ]);
         $updated = $order->changeStatus($request->status);
         if (!$updated) {
@@ -228,6 +238,13 @@ class OrderController extends Controller
         return back()->with('success', 'Order status updated to ' . $request->status . '.');
     }
 
+    public function approve(Order $order)
+    {
+        if ($order->status !== 'ready') return back()->withErrors('Only ready orders can be approved.');
+        $order->update(['status' => 'approved']);
+        return back()->with('success', 'Order approved. Proceed to payment.');
+    }
+
     // SHOW INVOICE
     public function invoice(Order $order)
     {
@@ -240,10 +257,38 @@ class OrderController extends Controller
         if (in_array($order->status, ['cancelled'])) {
             return back()->with('success', 'Order already cancelled.');
         }
-        if (!in_array($order->status, ['pending', 'confirmed', 'preparing'])) {
-            return back()->withErrors('This order cannot be cancelled.');
+        $user = auth()->user();
+        $isManager = false;
+        try {
+            $stored = strtolower(trim($user->role ?? ''));
+            if ($stored === 'manager') {
+                $isManager = true;
+            } elseif (method_exists($user, 'hasRole') && $user->hasRole('Manager')) {
+                $isManager = true;
+            }
+        } catch (\Throwable $e) {}
+        if (!$isManager) {
+            return back()->withErrors('Only manager can cancel orders.');
         }
-        $order->update(['status' => 'cancelled']);
+        if ($order->status === 'delivered') {
+            return back()->withErrors('Delivered orders cannot be cancelled.');
+        }
+        DB::transaction(function () use ($order) {
+            if ($order->payment_status === 'paid') {
+                $order->load('items.menu.stock');
+                foreach ($order->items as $item) {
+                    $menu = $item->menu;
+                    if ($menu && $menu->stock) {
+                        $menu->stock->increment('current_quantity', $item->quantity);
+                    }
+                }
+                $order->update(['payment_status' => 'refunded']);
+            }
+            $order->update(['status' => 'cancelled']);
+        });
+        if ($order->order_type === 'dine_in' && $order->table_id && \Illuminate\Support\Facades\Schema::hasTable('restaurant_tables')) {
+            \App\Models\RestaurantTable::where('id', $order->table_id)->update(['status' => 'available']);
+        }
         return back()->with('success', 'Order cancelled successfully.');
     }
 
@@ -253,6 +298,15 @@ class OrderController extends Controller
             return back()->withErrors('Cancel the order before deleting.');
         }
         DB::transaction(function () use ($order) {
+            $order->load('items.menu.stock');
+            if ($order->payment_status === 'paid') {
+                foreach ($order->items as $item) {
+                    $menu = $item->menu;
+                    if ($menu && $menu->stock) {
+                        $menu->stock->increment('current_quantity', $item->quantity);
+                    }
+                }
+            }
             $order->items()->delete();
             $order->delete();
         });

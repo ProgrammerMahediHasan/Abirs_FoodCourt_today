@@ -103,19 +103,36 @@ Welcome to Abir's FoodCourt
                     <td class="text-center">
                         <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info btn-sm" title="View Order"><i class="fas fa-eye"></i></a>
 
-                        @if($order->status == 'pending')
-                            <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-success btn-sm" title="Approve Order">
-                                <i class="fas fa-check-circle"></i>
-                            </a>
+                        @if($order->status == 'ready')
+                            @role('Manager')
+                            <form action="{{ route('orders.approve', $order->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-primary btn-sm" title="Approve Order">
+                                    <i class="fas fa-thumbs-up"></i>
+                                </button>
+                            </form>
+                            @endrole
                         @endif
 
-                        @if($order->status == 'confirmed')
+                        @if($order->status == 'pending')
+                            @unlessrole('Cashier')
+                            <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-success btn-sm" title="Edit/Confirm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            @endunlessrole
+                        @endif
+
+                        @if($order->status == 'approved')
+                            @can('manage.payment')
                             <a href="{{ route('orders.payment.form', $order->id) }}" class="btn btn-warning btn-sm" title="Make Payment">
                                 <i class="fas fa-money-bill-wave"></i>
                             </a>
+                            @endcan
                         @endif
 
-                        @if(in_array($order->status, ['pending','confirmed','preparing']))
+                        @role('Manager')
+                        @if(in_array($order->status, ['pending','confirmed','preparing','ready','approved']))
                             <form action="{{ route('orders.cancel', $order->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
@@ -124,6 +141,7 @@ Welcome to Abir's FoodCourt
                                 </button>
                             </form>
                         @endif
+                        @endrole
 
                         @if($order->status == 'cancelled')
                             <form action="{{ route('orders.destroy', $order->id) }}" method="POST" class="d-inline">

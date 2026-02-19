@@ -19,6 +19,18 @@
     {{-- </ul>
     </li> --}}
 
+    @can('manage.users')
+    <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
+            <i class="flaticon-dashboard-1"></i>
+            <span class="nav-text">User & Role</span>
+        </a>
+        <ul aria-expanded="false">
+            <li><a href="{{ route('users.index') }}">Users</a></li>
+            <li><a href="{{ route('roles.index') }}">Roles</a></li>
+        </ul>
+    </li>
+    @endcan
+    @can('manage.basic')
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Menu & Category</span>
@@ -33,10 +45,12 @@
     <li><a href="{{('/customer_list')}}">customer-list</a></li> --}}
     </ul>
     </li>
+    @endcan
 
 
 
 
+    @can('manage.customer')
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Customers</span>
@@ -48,8 +62,10 @@
     {{-- <li><a href="{{ route('reports.customer.items') }}">Customer Order</a></li> --}}
     </ul>
     </li>
+    @endcan
 
     {{-- Restaurant Module  --}}
+    @can('manage.basic')
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Restaurants</span>
@@ -59,6 +75,7 @@
             <li><a href="{{ route('tables.index') }}">Tables</a></li>
         </ul>
     </li>
+    @endcan
 
 
 
@@ -76,9 +93,10 @@
     <li><a href="{{('/restaurants')}}">Stock-Out</a></li>
     <li><a href="{{('/restaurants')}}">Stock-Adjustment</a></li> --}}
     {{-- </ul>
-    </li> --}} 
+    </li> --}}
 
     {{-- Product/Inventory Module  --}}
+    @can('manage.basic')
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Stocks Inventory</span>
@@ -87,6 +105,7 @@
             <li><a href="{{asset('/stocks')}}">Stock-Adjustment</a></li>
         </ul>
     </li>
+    @endcan
 
 
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
@@ -117,6 +136,7 @@
     </li> --}}
 
 
+    @unlessrole('Cashier')
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Reports</span>
@@ -126,6 +146,7 @@
             {{-- <li><a href="{{ route('reports.customer.items') }}">Customer Order</a></li> --}}
         </ul>
     </li>
+    @endunlessrole
 
 
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">

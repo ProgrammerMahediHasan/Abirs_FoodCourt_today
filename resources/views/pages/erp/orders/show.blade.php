@@ -25,6 +25,26 @@
         >
             ← Back to Orders
         </a>
+        @if($order->status == 'ready')
+        @role('Manager')
+        <form method="POST" action="{{ route('orders.approve', $order->id) }}" class="d-inline">
+            @csrf
+            @method('PATCH')
+            <button type="submit" class="btn" style="background-color:#0EA5E9; border:1px solid #0EA5E9; border-radius:4px; padding:8px 16px; margin-left:10px;">Approve</button>
+        </form>
+        @endrole
+        @endif
+        @role('Manager')
+        @if(in_array($order->status, ['pending','confirmed','preparing','ready','approved']))
+        <form method="POST" action="{{ route('orders.cancel', $order->id) }}" class="d-inline">
+            @csrf
+            @method('PATCH')
+            <button type="submit" class="btn" style="background-color:#EF4444; border:1px solid #EF4444; border-radius:4px; padding:8px 16px; margin-left:10px;">
+                <i class="fas fa-times-circle"></i> Cancel
+            </button>
+        </form>
+        @endif
+        @endrole
     </div>
 
 </div>

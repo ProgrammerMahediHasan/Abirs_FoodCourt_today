@@ -23,6 +23,11 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\RestaurantTableController;
+use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\KitchenDashboardController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ManagerDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,57 +48,71 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/order/create', function () {
+        return redirect()->route('orders.create');
+    })->middleware('can:manage.orders')->name('order.create.alias');
+    Route::get('/order', function () {
+        return redirect()->route('orders.index');
+    })->middleware('can:manage.orders')->name('order.index.alias');
 
     // Profile Route
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
     // Inbox Route
     Route::get('/inbox', [InboxController::class, 'index'])->name('inbox.index');
+    Route::get('/kitchen', [KitchenDashboardController::class, 'index'])->middleware('role:Kitchen Staff')->name('kitchen.dashboard');
+    Route::get('/manager', [ManagerDashboardController::class, 'index'])->middleware('role:Manager')->name('manager.dashboard');
+    Route::get('/cashier', [\App\Http\Controllers\CashierDashboardController::class, 'index'])->middleware('role:Cashier')->name('cashier.dashboard');
+    Route::post('/users/{user}/role', [UserRoleController::class, 'update'])->middleware('can:manage.users')->name('users.role.update');
+    Route::resource('roles', RoleController::class)->middleware('can:manage.users');
+    Route::resource('users', UserController::class)->middleware('can:manage.users');
 
     /* ======================
         BASIC RESOURCES
     ======================= */
-    Route::resource('categories', CategoryController::class);
-    Route::resource('menus', MenuController::class);
-    Route::resource('customer', CustomerController::class);
-    Route::resource('restaurants', RestaurantController::class);
-    Route::resource('tables', RestaurantTableController::class);
-    Route::resource('products', ProductController::class);
-    Route::resource('stocks', StockController::class);
+    Route::resource('categories', CategoryController::class)->middleware('can:manage.basic');
+    Route::resource('menus', MenuController::class)->middleware('can:manage.basic');
+    Route::resource('customer', CustomerController::class)->middleware('can:manage.customer');
+    Route::resource('restaurants', RestaurantController::class)->middleware('can:manage.basic');
+    Route::resource('tables', RestaurantTableController::class)->middleware('can:manage.basic');
+    Route::resource('products', ProductController::class)->middleware('can:manage.basic');
+    Route::resource('stocks', StockController::class)->middleware('can:manage.basic');
 
     /* ======================
         ORDERS (MAIN)
     ======================= */
     Route::prefix('orders')->name('orders.')->group(function () {
 
-        Route::get('/', [OrderController::class, 'index'])->name('index');
-        Route::get('/create', [OrderController::class, 'create'])->name('create');
-        Route::post('/store', [OrderController::class, 'store'])->name('store');
-        Route::get('/{order}', [OrderController::class, 'show'])->name('show');
-        Route::get('/{order}/edit', [OrderController::class, 'edit'])->name('edit');
+        Route::get('/', [OrderController::class, 'index'])->name('index')->middleware('permission:orders.view');
+        Route::get('/create', [OrderController::class, 'create'])->name('create')->middleware('can:manage.orders');
+        Route::post('/store', [OrderController::class, 'store'])->name('store')->middleware('can:manage.orders');
+        Route::get('/{order}/edit', [OrderController::class, 'edit'])->name('edit')->middleware('permission:orders.view');
+        Route::get('/{order}', [OrderController::class, 'show'])->name('show')->middleware('permission:orders.view')->whereNumber('order');
 
-        // ✅ Confirm order
-        Route::patch('/{order}/confirm', [OrderController::class, 'confirm'])->name('confirm');
+        // ✅ Confirm order (Manager-only)
+        Route::patch('/{order}/confirm', [OrderController::class, 'confirm'])->name('confirm')->middleware('role:Manager');
 
         // ✅ Payment routes
-        Route::get('/{order}/payment', [OrderController::class, 'makePaymentForm'])->name('payment.form');
-        Route::post('/{order}/payment', [OrderController::class, 'processPayment'])->name('payment.process');
+        Route::get('/{order}/payment', [OrderController::class, 'makePaymentForm'])->name('payment.form')->middleware('can:manage.payment');
+        Route::post('/{order}/payment', [OrderController::class, 'processPayment'])->name('payment.process')->middleware('can:manage.payment');
 
-        Route::patch('/{order}/cancel', [OrderController::class, 'cancel'])->name('cancel');
-        Route::delete('/{order}', [OrderController::class, 'destroy'])->name('destroy');
+        Route::patch('/{order}/cancel', [OrderController::class, 'cancel'])->name('cancel')->middleware('can:manage.cancel');
+        Route::delete('/{order}', [OrderController::class, 'destroy'])->name('destroy')->middleware('role:Admin');
 
 
         Route::get('/orders', [PaymentController::class, 'index'])
+            ->middleware('can:manage.payment')
             ->name('pages.erp.payments.index');
 
         // ✅ Invoice
-        Route::get('/{order}/invoice', [OrderController::class, 'invoice'])->name('invoice');
+        Route::get('/{order}/invoice', [OrderController::class, 'invoice'])->name('invoice')->middleware('permission:orders.view');
 
         // Optional: Change status
-        Route::patch('/{order}/status', [OrderController::class, 'changeStatus'])->name('status');
+        Route::patch('/{order}/status', [OrderController::class, 'changeStatus'])->name('status')->middleware('role:Kitchen Staff');
+        Route::patch('/{order}/approve', [OrderController::class, 'approve'])->name('approve')->middleware('can:manage.approve');
 
         // Reports: Delivered Invoices
-        Route::get('/reports/delivered', [OrderController::class, 'deliveredReport'])->name('reports.delivered');
+        Route::get('/reports/delivered', [OrderController::class, 'deliveredReport'])->name('reports.delivered')->middleware('permission:reports.view');
     });
 
 
@@ -111,7 +130,7 @@ Route::middleware('auth')->group(function () {
         REPORTS
     ======================= */
     Route::get('/reports/customer', [OrderController::class, 'customerItemReport'])
-        ->name('reports.customer.items');
+        ->name('reports.customer.items')->middleware('permission:reports.view');
 
     /* ======================
         PURCHASES

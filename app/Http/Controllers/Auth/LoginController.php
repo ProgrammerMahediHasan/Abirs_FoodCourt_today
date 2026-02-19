@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -52,5 +53,30 @@ class LoginController extends Controller
     return view('auth.login');
 }
 
+    protected function redirectTo()
+    {
+        $user = auth()->user();
+        if ($user && ( ($user->role ?? null) === 'Kitchen Staff' || (method_exists($user,'hasRole') && $user->hasRole('Kitchen Staff')) )) {
+            return '/kitchen';
+        }
+        if ($user && ( ($user->role ?? null) === 'Manager' || (method_exists($user,'hasRole') && $user->hasRole('Manager')) )) {
+            return '/manager';
+        }
+        if ($user && ( ($user->role ?? null) === 'Cashier' || (method_exists($user,'hasRole') && $user->hasRole('Cashier')) )) {
+            return '/cashier';
+        }
+        return '/dashboard';
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        try {
+            if (($user->role ?? null) && method_exists($user, 'hasRole') && method_exists($user, 'assignRole')) {
+                if (! $user->hasRole($user->role)) {
+                    $user->assignRole($user->role);
+                }
+            }
+        } catch (\Throwable $e) {}
+    }
 
 }
