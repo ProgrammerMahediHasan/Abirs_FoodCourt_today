@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2026 at 08:13 PM
+-- Generation Time: Feb 20, 2026 at 11:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -131,8 +131,7 @@ CREATE TABLE `lar_cache` (
 --
 
 INSERT INTO `lar_cache` (`key`, `value`, `expiration`) VALUES
-('laravel-cache-mahedi|127.0.0.1', 'i:1;', 1770868936),
-('laravel-cache-mahedi|127.0.0.1:timer', 'i:1770868936;', 1770868936);
+('laravel-cache-spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:9:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:11:\"orders.view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:4:{i:0;i:1;i:1;i:2;i:2;i:3;i:3;i:4;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:13:\"orders.create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:2;a:4:{s:1:\"a\";i:3;s:1:\"b\";s:14:\"orders.payment\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:3;a:4:{s:1:\"a\";i:4;s:1:\"b\";s:12:\"reports.view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:4;a:4:{s:1:\"a\";i:5;s:1:\"b\";s:12:\"staff.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:5;a:4:{s:1:\"a\";i:6;s:1:\"b\";s:13:\"orders.status\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:4;}}i:6;a:4:{s:1:\"a\";i:7;s:1:\"b\";s:14:\"orders.approve\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:7;a:4:{s:1:\"a\";i:8;s:1:\"b\";s:14:\"orders.prepare\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:4;}}i:8;a:4:{s:1:\"a\";i:9;s:1:\"b\";s:15:\"payment.process\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:3;}}}s:5:\"roles\";a:4:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:5:\"Admin\";s:1:\"c\";s:3:\"web\";}i:1;a:3:{s:1:\"a\";i:2;s:1:\"b\";s:7:\"Manager\";s:1:\"c\";s:3:\"web\";}i:2;a:3:{s:1:\"a\";i:3;s:1:\"b\";s:7:\"Cashier\";s:1:\"c\";s:3:\"web\";}i:3;a:3:{s:1:\"a\";i:4;s:1:\"b\";s:13:\"Kitchen Staff\";s:1:\"c\";s:3:\"web\";}}}', 1771666988);
 
 -- --------------------------------------------------------
 
@@ -221,8 +220,7 @@ INSERT INTO `lar_customers` (`id`, `name`, `email`, `phone`, `address`, `status`
 (9, 'William Anderson', 'william@example.com', '01710000009', '101 Sunset Boulevard, Comilla', 1, '2026-01-04 14:35:35', '2026-01-04 14:35:35'),
 (10, 'Ava Thomas', 'ava@example.com', '01710000010', '202 Ocean Drive, Mymensingh', 1, '2026-01-04 14:35:35', '2026-01-04 14:35:35'),
 (12, 'MAHEDI HASAN', 'afranabir03@gmail.com', '01632606827', 'Narayanganj,Siddhirganj', 1, '2026-01-04 23:22:23', '2026-01-04 23:40:54'),
-(13, 'Pollob', NULL, '01575550883', 'Kawran Bazar,Janata tower', 1, '2026-02-16 18:30:30', '2026-02-16 18:30:30'),
-(14, 'Pollob', NULL, '01983581152', 'Narayanganj,Siddhirganj', 1, '2026-02-16 19:05:19', '2026-02-16 19:05:19');
+(13, 'Pollob', 'pollob@example.com', '01575550883', 'Kawran Bazar,Janata tower', 1, '2026-02-16 18:30:30', '2026-02-19 19:32:35');
 
 -- --------------------------------------------------------
 
@@ -303,22 +301,22 @@ INSERT INTO `lar_menus` (`id`, `category_id`, `name`, `description`, `price`, `i
 (3, 2, 'Margherita Pizza', 'Classic cheese pizza with tomato sauce', 550.00, 'menus/RixYRUHC7gi4NcuCTMFd9dfjBqQKhEv5qB8Gj70P.jpg', 1, '2026-01-05 04:05:13', '2026-02-16 14:40:54'),
 (4, 2, 'Pepperoni Pizza', 'Pepperoni pizza with mozzarella cheese', 650.00, 'menus/ZwGFxsFQQ4wWTlSxBqxuZEN6BVJERmIqcN090MBS.jpg', 1, '2026-01-05 04:05:13', '2026-02-16 14:42:27'),
 (5, 3, 'Creamy Alfredo Pasta', 'Pasta in creamy alfredo sauce', 480.00, 'menus/CZVUC3dWiBIhTOPgNSk3XfIicrM1PeGvUvW8sfXc.jpg', 1, '2026-01-05 04:05:13', '2026-02-16 14:42:45'),
-(6, 3, 'Spicy Arrabiata Pasta', 'Pasta with spicy tomato sauce', 460.00, 'menus/dQzH6a4kMM1IEAy8vemydB6ykuwa6VboJqU8xWGs.jpg', 0, '2026-01-05 04:05:13', '2026-01-09 00:18:56'),
-(7, 4, 'Chicken Fried Rice', 'Fried rice with chicken and vegetables', 380.00, 'menus/rYKGBIH2yunJdSB3urpuVHvecKLSgcPwpfQMyDQM.jpg', 1, '2026-01-05 04:05:13', '2026-01-09 00:17:45'),
-(8, 4, 'Beef Biryani', 'Traditional beef biryani with spices', 420.00, 'menus/sCbQ9pLHwplgM5o6GlbOjKRxFsg5jo6uo3vIelnT.webp', 1, '2026-01-05 04:05:13', '2026-01-09 00:16:15'),
-(9, 5, 'Grilled Chicken', 'Grilled chicken served with sauce', 520.00, 'menus/HvRm8CVyZdx0bx2a6bvPkwSU3yOggwGbq5ka71f3.webp', 1, '2026-01-05 04:05:13', '2026-01-09 00:14:55'),
-(10, 6, 'Beef Steak', 'Tender beef steak with gravy', 850.00, 'menus/RLi0Oli12rj9vLmc3tBhsPp87JxqTaYExn2gkNUe.jpg', 1, '2026-01-05 04:05:13', '2026-01-09 00:11:25'),
-(11, 7, 'Fried Prawns', 'Crispy fried prawns', 600.00, 'menus/oerb5OwVCdNuO788TWTC8gYe51Duhg9L0kmGvIQ1.jpg', 1, '2026-01-05 04:05:13', '2026-01-09 00:09:02'),
-(12, 8, 'Vegetable Curry', 'Mixed vegetable curry', 300.00, 'menus/Lcs6qQX1HAo1PImn2EG916XRikm4y7hBnMyx0k0b.jpg', 1, '2026-01-05 04:05:13', '2026-01-09 00:07:28'),
-(13, 9, 'French Fries', 'Golden crispy french fries', 180.00, 'menus/kPUJaUiv8osQtVEAs1Rx9vG5DUrGtDN02iwYteTa.webp', 1, '2026-01-05 04:05:13', '2026-01-09 00:05:52'),
-(14, 10, 'Chicken Nuggets', 'Crunchy chicken nuggets', 260.00, 'menus/khvmTnj1gosqA1l56AoVR7gLsNnO3NHXiBcGCjje.jpg', 1, '2026-01-05 04:05:13', '2026-01-09 00:03:22'),
-(15, 11, 'Chocolate Cake', 'Rich chocolate layered cake', 320.00, 'menus/eyxEtJpmDVAgP1UgmGaVWUCHpahBgzYfh8NybkMg.jpg', 1, '2026-01-05 04:05:13', '2026-01-09 00:01:41'),
-(16, 12, 'Vanilla Ice Cream', 'Classic vanilla ice cream scoop', 150.00, 'menus/5vXOzQ0yK7mtos6Hs7oIU64dZQvtvlyaGJ1tmAYE.webp', 1, '2026-01-05 04:05:13', '2026-01-09 00:00:32'),
-(17, 13, 'Coca Cola', 'Chilled soft drink', 60.00, 'menus/codUFf0kQkQPBVBPha8QF4P1vxdHOseQFYwko6bJ.jpg', 1, '2026-01-05 04:05:13', '2026-01-08 23:58:52'),
-(18, 14, 'Hot Coffee', 'Freshly brewed hot coffee', 120.00, 'menus/U30P2W7AxZQ4lCbS5lM6T3hMXbutxSJotdobwarM.jpg', 1, '2026-01-05 04:05:13', '2026-01-08 23:56:38'),
-(19, 15, 'Orange Juice', 'Freshly squeezed orange juice', 140.00, 'menus/LkFLF63OQ80ycLcydMA0SfMWpglSNeEvYMy1yQQE.jpg', 1, '2026-01-05 04:05:13', '2026-01-08 23:55:28'),
-(20, 20, 'Kids Mini Burger', 'Small burger specially for kids', 160.00, 'menus/59Yq75xudE6DmNHzc6JcuVOFlMA3IjsfYMrvwJ9C.jpg', 1, '2026-01-05 04:05:13', '2026-01-08 23:53:18'),
-(22, 10, 'sandwich', 'a popular food featuring fillings like meat, cheese, vegetables, or spreads layered between slices of bread', 100.00, 'menus/iZ3EtjlRleNLMiNwRvmwekPYMS1CbGaE8kizQkjU.jpg', 1, '2026-01-08 23:52:05', '2026-01-08 23:52:05');
+(6, 3, 'Spicy Arrabiata Pasta', 'Pasta with spicy tomato sauce', 460.00, 'menus/IeDCFgqM49s4JDddu9lG1Pcj1t5NLRn6eNNmC6CW.jpg', 0, '2026-01-05 04:05:13', '2026-02-17 04:38:45'),
+(7, 4, 'Chicken Fried Rice', 'Fried rice with chicken and vegetables', 380.00, 'menus/om2sYQAPqFHPPtwCCa2WrSB60oiDJdUg1JawGiH1.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:39:09'),
+(8, 4, 'Beef Biryani', 'Traditional beef biryani with spices', 420.00, 'menus/Z5VOvhPA8llq3Kc2Vdh1PSJgCa64UoawKBDARDWT.webp', 1, '2026-01-05 04:05:13', '2026-02-17 04:39:32'),
+(9, 5, 'Grilled Chicken', 'Grilled chicken served with sauce', 520.00, 'menus/n5DvmYFtxuBTdvxfa5DYd2zonCNVvJRSUFkZdDqg.webp', 1, '2026-01-05 04:05:13', '2026-02-17 04:39:55'),
+(10, 6, 'Beef Steak', 'Tender beef steak with gravy', 850.00, 'menus/3NilolO0oVErRAj0kqGG6DPoi7q3BPM8Ylx2iFe3.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:41:01'),
+(11, 7, 'Fried Prawns', 'Crispy fried prawns', 600.00, 'menus/sCIUNjOVK0cIZ8IBHtnjzTcVg98M3yTSeMHYMssz.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:41:23'),
+(12, 8, 'Vegetable Curry', 'Mixed vegetable curry', 300.00, 'menus/xZxfaNgmZmndYtVW3Bqi35n2WOF7cnhKTAxTThP3.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:41:43'),
+(13, 9, 'French Fries', 'Golden crispy french fries', 180.00, 'menus/qX2YkXH8HKrNEWhynPMQ9ZoyAvnKlGGc7SZO6Sv4.webp', 1, '2026-01-05 04:05:13', '2026-02-17 04:42:05'),
+(14, 10, 'Chicken Nuggets', 'Crunchy chicken nuggets', 260.00, 'menus/vkzc1edfEu7TDcNjUmL55ZXX4KipPVEXz53khsZ0.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:42:27'),
+(15, 11, 'Chocolate Cake', 'Rich chocolate layered cake', 320.00, 'menus/c5oZVBCj0V5JiXmCs4OdcEbr589FgVTQG3r45wbP.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:42:46'),
+(16, 12, 'Vanilla Ice Cream', 'Classic vanilla ice cream scoop', 150.00, 'menus/2itjlwEQPzCtdeK5Vx9uKmYatDcwwfxc04ytbmXD.webp', 1, '2026-01-05 04:05:13', '2026-02-17 04:43:06'),
+(17, 13, 'Coca Cola', 'Chilled soft drink', 60.00, 'menus/6g3AC0pfvHpx7aGtS3aUq8YbhGeJ3uwlupEGoBUH.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:43:23'),
+(18, 14, 'Hot Coffee', 'Freshly brewed hot coffee', 120.00, 'menus/jj0MNjm4YjCiXL9QLi5Dt78trYdUzzFtGX10tvrB.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:43:40'),
+(19, 15, 'Orange Juice', 'Freshly squeezed orange juice', 140.00, 'menus/9u0c86G35DRqY44eORKaLY25kGDwELTDOVpfdQXj.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:43:57'),
+(20, 20, 'Kids Mini Burger', 'Small burger specially for kids', 160.00, 'menus/Jps8kWeI1NYHmRdQJ3hAtPNp9yRKrXYnRiFO2MQK.jpg', 1, '2026-01-05 04:05:13', '2026-02-17 04:44:17'),
+(22, 10, 'sandwich', 'a popular food featuring fillings like meat, cheese, vegetables, or spreads layered between slices of bread', 100.00, 'menus/AVxOyKjE4J9ZJrQTgTXNygBC9M8iYhK4Om5lWYT8.jpg', 1, '2026-01-08 23:52:05', '2026-02-17 04:44:35');
 
 -- --------------------------------------------------------
 
@@ -369,7 +367,57 @@ INSERT INTO `lar_migrations` (`id`, `migration`, `batch`) VALUES
 (32, '2026_01_19_123404_add_payment_columns_to_orders_table', 13),
 (33, '2026_01_19_123741_add_payment_columns_to_orders_table', 13),
 (34, '2026_01_19_124354_add_payment_columns_to_orders_table', 13),
-(35, '2026_01_19_160159_create_analyses_table', 14);
+(35, '2026_01_19_160159_create_analyses_table', 14),
+(36, '2026_02_19_000001_create_restaurant_tables', 15),
+(37, '2026_02_19_000002_add_table_id_to_orders', 15),
+(38, '2026_02_19_000003_update_table_status_enum', 16),
+(39, '2026_02_19_120000_create_permission_tables', 17),
+(40, '2026_02_19_120100_seed_default_roles_permissions', 18),
+(41, '2026_02_19_120200_add_role_column_to_users', 19),
+(42, '2026_02_19_120300_add_orders_status_permission', 20),
+(43, '2026_02_19_121000_add_orders_approve_permission', 21),
+(44, '2026_02_19_121100_add_orders_payment_permission', 22),
+(45, '2026_02_20_004350_alter_orders_status_add_approved', 23),
+(46, '2026_02_20_005200_sync_user_roles_from_users_table', 24);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lar_model_has_permissions`
+--
+
+CREATE TABLE `lar_model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lar_model_has_roles`
+--
+
+CREATE TABLE `lar_model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lar_model_has_roles`
+--
+
+INSERT INTO `lar_model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 9),
+(2, 'App\\Models\\User', 10),
+(3, 'App\\Models\\User', 11),
+(4, 'App\\Models\\User', 12),
+(4, 'App\\Models\\User', 13),
+(4, 'App\\Models\\User', 14),
+(4, 'App\\Models\\User', 15),
+(4, 'App\\Models\\User', 16),
+(4, 'App\\Models\\User', 17);
 
 -- --------------------------------------------------------
 
@@ -382,8 +430,9 @@ CREATE TABLE `lar_orders` (
   `order_no` varchar(255) NOT NULL,
   `customer_id` bigint(20) UNSIGNED DEFAULT NULL,
   `restaurant_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `table_id` bigint(20) UNSIGNED DEFAULT NULL,
   `order_type` enum('dine_in','takeaway','delivery') NOT NULL DEFAULT 'dine_in',
-  `status` enum('pending','confirmed','preparing','ready','delivered','cancelled') NOT NULL DEFAULT 'pending',
+  `status` enum('pending','confirmed','preparing','ready','approved','delivered','cancelled') NOT NULL DEFAULT 'pending',
   `payment_status` varchar(255) DEFAULT NULL,
   `payment_method` varchar(255) DEFAULT NULL,
   `invoice_token` varchar(255) DEFAULT NULL,
@@ -401,15 +450,13 @@ CREATE TABLE `lar_orders` (
 -- Dumping data for table `lar_orders`
 --
 
-INSERT INTO `lar_orders` (`id`, `order_no`, `customer_id`, `restaurant_id`, `order_type`, `status`, `payment_status`, `payment_method`, `invoice_token`, `subtotal`, `tax`, `discount`, `total`, `note`, `ordered_at`, `created_at`, `updated_at`) VALUES
-(13, 'ORD-20260119-0003', 12, 16, 'takeaway', 'delivered', 'paid', 'online', 'INV-20260212-SIRKE', 2350.00, 0.00, 0.00, 2350.00, NULL, '2026-01-19 05:19:31', '2026-01-19 05:19:31', '2026-02-12 04:07:55'),
-(14, 'ORD-1768845139', 1, 11, 'dine_in', 'delivered', 'paid', 'cod', 'INV-20260212-6CYWA', 180.00, 0.00, 0.00, 180.00, NULL, '2026-01-19 11:52:19', '2026-01-19 11:52:19', '2026-02-12 04:04:24'),
-(15, 'ORD-1770888485', 10, 11, 'dine_in', 'delivered', 'paid', 'cash', 'INV-20260212-T8TS5', 930.00, 0.00, 0.00, 930.00, NULL, '2026-02-12 03:28:05', '2026-02-12 03:28:05', '2026-02-12 04:01:40'),
-(16, 'ORD-1770894033', 1, 11, 'dine_in', 'delivered', 'paid', 'online', 'INV-20260212-KSCJB', 240.00, 0.00, 0.00, 240.00, NULL, '2026-02-12 05:00:33', '2026-02-12 05:00:33', '2026-02-12 07:45:33'),
-(19, 'ORD-1770914342', 7, 14, 'takeaway', 'delivered', 'paid', 'cash', 'INV-20260215-A1BAW', 250.00, 0.00, 0.00, 250.00, NULL, '2026-02-12 10:39:02', '2026-02-12 10:39:02', '2026-02-14 21:04:33'),
-(20, 'ORD-1771124729', 10, 13, 'dine_in', 'confirmed', 'paid', 'cod', NULL, 250.00, 0.00, 0.00, 250.00, NULL, '2026-02-14 21:05:29', '2026-02-14 21:05:29', '2026-02-14 21:05:52'),
-(35, 'ORD-1771268719', 14, 11, 'delivery', 'pending', 'paid', 'card', NULL, 220.00, 11.00, 0.00, 231.00, NULL, '2026-02-16 19:05:19', '2026-02-16 19:05:19', '2026-02-16 19:05:19'),
-(37, 'ORD-1771268919', 12, 11, 'dine_in', 'pending', NULL, NULL, NULL, 420.00, 0.00, 0.00, 420.00, NULL, '2026-02-16 19:08:39', '2026-02-16 19:08:39', '2026-02-16 19:08:39');
+INSERT INTO `lar_orders` (`id`, `order_no`, `customer_id`, `restaurant_id`, `table_id`, `order_type`, `status`, `payment_status`, `payment_method`, `invoice_token`, `subtotal`, `tax`, `discount`, `total`, `note`, `ordered_at`, `created_at`, `updated_at`) VALUES
+(42, 'ORD-1771530174', 13, 11, 1, 'dine_in', 'delivered', 'paid', 'bkash', 'INV-20260220-LZVHQ', 420.00, 21.00, 20.00, 421.00, NULL, '2026-02-19 19:42:54', '2026-02-19 19:42:54', '2026-02-19 19:50:51'),
+(43, 'ORD-1771533565', 12, 11, 2, 'dine_in', 'delivered', 'paid', 'nagad', 'INV-20260220-YXCNI', 2280.00, 114.00, 0.00, 2394.00, NULL, '2026-02-19 20:39:25', '2026-02-19 20:39:25', '2026-02-19 20:42:48'),
+(44, 'ORD-1771534760', 9, 12, 4, 'dine_in', 'delivered', 'paid', 'bkash', 'INV-20260220-WRKLM', 2520.00, 126.00, 120.00, 2526.00, NULL, '2026-02-19 20:59:20', '2026-02-19 20:59:20', '2026-02-19 21:02:23'),
+(45, 'ORD-1771567218', 6, 12, 4, 'dine_in', 'approved', NULL, NULL, NULL, 5100.00, 255.00, 0.00, 5355.00, NULL, '2026-02-20 06:00:18', '2026-02-20 06:00:18', '2026-02-20 09:35:24'),
+(46, 'ORD-1771568090', 2, 11, 1, 'dine_in', 'approved', NULL, NULL, NULL, 1700.00, 85.00, 0.00, 1785.00, NULL, '2026-02-20 06:14:50', '2026-02-20 06:14:50', '2026-02-20 10:31:16'),
+(47, 'ORD-1771583296', 3, 12, 5, 'dine_in', 'delivered', 'paid', 'rocket', 'INV-20260220-6CIVM', 4250.00, 212.50, 0.00, 4462.50, NULL, '2026-02-20 10:28:16', '2026-02-20 10:28:16', '2026-02-20 10:33:27');
 
 -- --------------------------------------------------------
 
@@ -434,14 +481,12 @@ CREATE TABLE `lar_order_items` (
 --
 
 INSERT INTO `lar_order_items` (`id`, `order_id`, `menu_id`, `quantity`, `unit_price`, `total_price`, `special_request`, `created_at`, `updated_at`) VALUES
-(3, 13, 2, 5, 220.00, 1100.00, NULL, '2026-01-19 05:19:31', '2026-01-19 05:19:31'),
-(4, 13, 1, 5, 250.00, 1250.00, NULL, '2026-01-19 05:19:31', '2026-01-19 05:19:31'),
-(5, 14, 17, 3, 60.00, 180.00, NULL, '2026-01-19 11:52:19', '2026-01-19 11:52:19'),
-(6, 15, 1, 3, 250.00, 750.00, NULL, '2026-02-12 03:28:05', '2026-02-12 03:28:05'),
-(7, 15, 17, 3, 60.00, 180.00, NULL, '2026-02-12 03:28:05', '2026-02-12 03:28:05'),
-(8, 16, 17, 4, 60.00, 240.00, NULL, '2026-02-12 05:00:33', '2026-02-12 05:00:33'),
-(25, 35, 2, 1, 220.00, 220.00, NULL, '2026-02-16 19:05:19', '2026-02-16 19:05:19'),
-(28, 37, 8, 1, 420.00, 420.00, NULL, '2026-02-16 19:08:39', '2026-02-16 19:08:39');
+(34, 42, 8, 1, 420.00, 420.00, NULL, '2026-02-19 19:42:54', '2026-02-19 19:42:54'),
+(35, 43, 7, 6, 380.00, 2280.00, NULL, '2026-02-19 20:39:25', '2026-02-19 20:39:25'),
+(36, 44, 8, 6, 420.00, 2520.00, NULL, '2026-02-19 20:59:20', '2026-02-19 20:59:20'),
+(37, 45, 10, 6, 850.00, 5100.00, NULL, '2026-02-20 06:00:18', '2026-02-20 06:00:18'),
+(38, 46, 10, 2, 850.00, 1700.00, NULL, '2026-02-20 06:14:50', '2026-02-20 06:14:50'),
+(39, 47, 10, 5, 850.00, 4250.00, NULL, '2026-02-20 10:28:16', '2026-02-20 10:28:16');
 
 -- --------------------------------------------------------
 
@@ -454,6 +499,35 @@ CREATE TABLE `lar_password_reset_tokens` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lar_permissions`
+--
+
+CREATE TABLE `lar_permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL DEFAULT 'web',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lar_permissions`
+--
+
+INSERT INTO `lar_permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'orders.view', 'web', NULL, NULL),
+(2, 'orders.create', 'web', NULL, NULL),
+(3, 'orders.payment', 'web', NULL, NULL),
+(4, 'reports.view', 'web', NULL, NULL),
+(5, 'staff.manage', 'web', NULL, NULL),
+(6, 'orders.status', 'web', NULL, NULL),
+(7, 'orders.approve', 'web', NULL, NULL),
+(8, 'orders.prepare', 'web', '2026-02-20 06:33:29', '2026-02-20 06:33:29'),
+(9, 'payment.process', 'web', '2026-02-20 09:42:40', '2026-02-20 09:42:40');
 
 -- --------------------------------------------------------
 
@@ -481,9 +555,9 @@ CREATE TABLE `lar_personal_access_tokens` (
 INSERT INTO `lar_personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
 (1, 'App\\Models\\User', 11, 'frontend', '493e6c3c513bfe723c9b997974cfb112029c285d2191d96b31e5497eba30316b', '[\"*\"]', '2026-02-16 14:36:23', NULL, '2026-02-16 14:08:01', '2026-02-16 14:36:23'),
 (2, 'App\\Models\\User', 11, 'frontend', '6cc64ac36f75a1a52131e7f5164627c29312368e66f20a635acbc50d08c34373', '[\"*\"]', '2026-02-16 14:51:47', NULL, '2026-02-16 14:36:38', '2026-02-16 14:51:47'),
-(3, 'App\\Models\\User', 11, 'frontend', 'ceb2a3b6c1eea2eb04779e7239ea1563c2637e5a5a6a6cc64ea1380dd4f46da7', '[\"*\"]', '2026-02-16 17:58:33', NULL, '2026-02-16 15:02:10', '2026-02-16 17:58:33'),
 (4, 'App\\Models\\User', 11, 'frontend', '9d738a16c32e096bd945dd95bd087591402d632663aca220c538126e4ec0210b', '[\"*\"]', '2026-02-16 18:21:34', NULL, '2026-02-16 18:03:58', '2026-02-16 18:21:34'),
-(5, 'App\\Models\\User', 11, 'frontend', '13cee1c61771d7dd4fc6fdc246312ae26147fe0ac4fa35745a315854475db2f0', '[\"*\"]', '2026-02-16 18:53:18', NULL, '2026-02-16 18:21:42', '2026-02-16 18:53:18');
+(5, 'App\\Models\\User', 11, 'frontend', '13cee1c61771d7dd4fc6fdc246312ae26147fe0ac4fa35745a315854475db2f0', '[\"*\"]', '2026-02-16 18:53:18', NULL, '2026-02-16 18:21:42', '2026-02-16 18:53:18'),
+(6, 'App\\Models\\User', 11, 'frontend', '924895e241d18e3fe0a89834cb1a77c5606db499a3cdced24766cbf1b8ddf8f6', '[\"*\"]', '2026-02-17 04:50:39', NULL, '2026-02-17 04:49:08', '2026-02-17 04:50:39');
 
 -- --------------------------------------------------------
 
@@ -582,6 +656,95 @@ INSERT INTO `lar_restaurants` (`id`, `name`, `email`, `phone`, `address`, `statu
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lar_restaurant_tables`
+--
+
+CREATE TABLE `lar_restaurant_tables` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `restaurant_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `capacity` int(10) UNSIGNED NOT NULL DEFAULT 2,
+  `status` enum('available','booked','occupied') NOT NULL DEFAULT 'available',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lar_restaurant_tables`
+--
+
+INSERT INTO `lar_restaurant_tables` (`id`, `restaurant_id`, `name`, `capacity`, `status`, `created_at`, `updated_at`) VALUES
+(1, 11, 'Table-1', 2, 'occupied', '2026-02-18 18:33:03', '2026-02-20 06:14:50'),
+(2, 11, 'Table-2', 6, 'available', '2026-02-18 18:33:30', '2026-02-19 20:42:48'),
+(3, 11, 'Table-3', 4, 'occupied', '2026-02-18 18:33:47', '2026-02-18 18:35:37'),
+(4, 12, 'Tab-1', 6, 'occupied', '2026-02-19 20:58:19', '2026-02-20 06:00:18'),
+(5, 12, 'Tab-2', 5, 'available', '2026-02-20 10:25:13', '2026-02-20 10:33:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lar_roles`
+--
+
+CREATE TABLE `lar_roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) NOT NULL DEFAULT 'web',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lar_roles`
+--
+
+INSERT INTO `lar_roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'web', NULL, NULL),
+(2, 'Manager', 'web', NULL, NULL),
+(3, 'Cashier', 'web', NULL, NULL),
+(4, 'Kitchen Staff', 'web', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lar_role_has_permissions`
+--
+
+CREATE TABLE `lar_role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lar_role_has_permissions`
+--
+
+INSERT INTO `lar_role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(2, 1),
+(2, 2),
+(2, 3),
+(3, 1),
+(3, 2),
+(3, 3),
+(4, 1),
+(4, 2),
+(5, 1),
+(5, 2),
+(6, 1),
+(6, 2),
+(6, 4),
+(7, 1),
+(7, 2),
+(8, 4),
+(9, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lar_sessions`
 --
 
@@ -599,20 +762,7 @@ CREATE TABLE `lar_sessions` (
 --
 
 INSERT INTO `lar_sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('3xpXkpmmEumepzvf4ci2gKFeyY5yLmMXANhzqA5B', 10, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTUtjV2lRYWVoOW1OeGpTYTBtamNMc2V3NFlNd2xseGNrREVZYUtZaCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcHJvZmlsZSI7czo1OiJyb3V0ZSI7czoxMzoicHJvZmlsZS5pbmRleCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjEwO3M6NDoiYXV0aCI7YToxOntzOjIxOiJwYXNzd29yZF9jb25maXJtZWRfYXQiO2k6MTc3MDg5Mjc3MTt9fQ==', 1770915681),
-('bbAtTJZgTxVWqHXcfnHV8Xbl7w1QYMpq4XLHMkfW', 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiYm55ZXcxaXpyWVMyWkJyNHhwb29LTGtDM2t2S3JMQjVrdEJqNWE3aCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjQ5OiJodHRwOi8vbG9jYWxob3N0L0FiaXJzX0Zvb2RDb3VydC9wdWJsaWMvZGFzaGJvYXJkIjtzOjU6InJvdXRlIjtzOjk6ImRhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcxMjUyNjk0O319', 1771252978),
-('Bvi4QrG4om2XOzORu1M53qxGqKBuxhn13g1NuYJs', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiaTRuRzI3bWZsb2ZXckRkR3NTbE5vRE9TNjhOeFZpOWhucjZORFRPRyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozOToiaHR0cDovL2xvY2FsaG9zdC9BYmlyc19Gb29kQ291cnQvcHVibGljIjt9czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3QvQWJpcnNfRm9vZENvdXJ0L3B1YmxpYyI7czo1OiJyb3V0ZSI7Tjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1770990825),
-('cgZyAqPC1apL26lqLTOyhcoV493XMcfVr7Z4ozhT', 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibHk3elo2UjRhZnUxbWhUSjZCbEtaUDFzaUdSbmpueDdSM1B5TkhzNiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjU3OiJodHRwOi8vbG9jYWxob3N0L0FiaXJzX0Zvb2RDb3VydC9wdWJsaWMvb3JkZXJzLzE5L3BheW1lbnQiO3M6NToicm91dGUiO3M6MTk6Im9yZGVycy5wYXltZW50LmZvcm0iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo5O3M6NDoiYXV0aCI7YToxOntzOjIxOiJwYXNzd29yZF9jb25maXJtZWRfYXQiO2k6MTc3MDk5OTA0Mzt9fQ==', 1770999083),
-('dW1DdgYlbUKt9PkiVW1Htd1OtmUNjTNsVKY9T49r', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUmk0M2NZczJMQzdQUkgxOUxVVk5JZ2NXdk5WVUFlSkNnc2dsbEozUSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjQ2OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvb3JkZXJzL3JlcG9ydHMvZGVsaXZlcmVkIjtzOjU6InJvdXRlIjtzOjI0OiJvcmRlcnMucmVwb3J0cy5kZWxpdmVyZWQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo5O3M6NDoiYXV0aCI7YToxOntzOjIxOiJwYXNzd29yZF9jb25maXJtZWRfYXQiO2k6MTc3MTI0ODkwMDt9fQ==', 1771249098),
-('eVhCylsEPyi8ubiYLkPhW30Go430O7V3gm10foBT', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYmwwallTYVhzcUVDZzc4aHV2U2VzU093N1dNTTFRMVhCUUJTclhxSSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozOToiaHR0cDovL2xvY2FsaG9zdC9BYmlyc19Gb29kQ291cnQvcHVibGljIjt9czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9sb2NhbGhvc3QvQWJpcnNfRm9vZENvdXJ0L3B1YmxpYy9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1771075655),
-('gIu7s4oD9YuY82Mer9m1nqjGMMXGHlSeKoDS8yzi', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiZTFBV3hWazhXR1FJTVp3bW1PdGlNOEhOOERRZEtJeXpSYjYwTlJ4WiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjM0OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbWVudXM/cGFnZT0yIjtzOjU6InJvdXRlIjtzOjExOiJtZW51cy5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcxMTI2OTk0O319', 1771128329),
-('GlTps07sN5igNOKWqy0R6atg3gZSQ2zKAMn0NYv1', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.107.1 Chrome/142.0.7444.235 Electron/39.2.7 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQXNtYXFVem5BVFpvWktTZFdNbEJLbzVXR1FITnFZQ1NzUEI4N1BYVyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo3ODoiaHR0cDovL2xvY2FsaG9zdC9BYmlyc19Gb29kQ291cnQvcHVibGljP2lkZV93ZWJ2aWV3X3JlcXVlc3RfdGltZT0xNzcwOTU3MjU4OTUzIjt9czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9sb2NhbGhvc3QvQWJpcnNfRm9vZENvdXJ0L3B1YmxpYy9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1770957259),
-('MdkcvBNJmedQmH27cSYBMv9Nh4i7ydWhC35KFMmL', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNXY4RmhIejFmelNsTFNDSFhEY0JJUklGM3doaVdJZzRBdkhrVzJ2aiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozOToiaHR0cDovL2xvY2FsaG9zdC9BYmlyc19Gb29kQ291cnQvcHVibGljIjt9czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3QvQWJpcnNfRm9vZENvdXJ0L3B1YmxpYyI7czo1OiJyb3V0ZSI7Tjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1770990825),
-('MXcIlSKpI2lwlN3dmUjh5JuzvXwc1OZ8KeibvYU8', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Trae/1.107.1 Chrome/142.0.7444.235 Electron/39.2.7 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVXNITGZFYjJkNVppQzdNZWI5TUtXOEVxRzloWnlIdXU0SXVPdFFlTSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly9sb2NhbGhvc3QvQWJpcnNfRm9vZENvdXJ0L3B1YmxpYy9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1770919056),
-('nfHBvQk7hTkMuuEsQDwgBaCYcQ7ZTkR1miFALvDC', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiQ29QQmF5WWt1UDhYdTRpSzBpSzkzS3h5WUV2ZGx3VTRGcmlMajRzWSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcHJvZmlsZSI7czo1OiJyb3V0ZSI7czoxMzoicHJvZmlsZS5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcxMDc1ODY3O319', 1771075911),
-('XX74q8gmKD3KUvzoKb3HnYQDREgFCDIavwKWLWZw', 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiN1NwT1B4WUtxMTRQRTJNVnFNNVZMd2tXcHN1SHhSVmN0MWhjVEV0SiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjQ5OiJodHRwOi8vbG9jYWxob3N0L0FiaXJzX0Zvb2RDb3VydC9wdWJsaWMvb3JkZXJzLzM3IjtzOjU6InJvdXRlIjtzOjExOiJvcmRlcnMuc2hvdyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcxMjY1MTAyO319', 1771268922),
-('yIFPMekAnYR11rqey9YwtYpnEErzEuxmYk2wtt3x', 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoicW43UlNRZXc0ZEo2Y3ozd3dUUzBKZ2RLRGZhUVdQQnFsQjNYZ3BlQiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjM5OiJodHRwOi8vbG9jYWxob3N0L0FiaXJzX0Zvb2RDb3VydC9wdWJsaWMiO3M6NToicm91dGUiO047fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcwOTIwMjMyO319', 1770920239),
-('Zq8ZahNTROYKhmSNia6fS3109kiqlcZuGPa9otay', 9, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRE5PQ1VJSmxiTHIxUXNva3BDbkRiQ0JNQVplTHFwSzRkd3VpVlRLSyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjM5OiJodHRwOi8vbG9jYWxob3N0L0FiaXJzX0Zvb2RDb3VydC9wdWJsaWMiO3M6NToicm91dGUiO047fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcxMTI0NDk4O319', 1771125868);
+('iRedss5T0QG4y7AlndXowWUBXzkVJBwKB0T3lIbK', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiaWM1Y25kMTNVdkFTYlRQYk5XZmY2Ylh5U2hneG5PbVo4bk05TWIwYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjMxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZGFzaGJvYXJkIjtzOjU6InJvdXRlIjtzOjk6ImRhc2hib2FyZCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcxNTgzNjI3O319', 1771583650);
 
 -- --------------------------------------------------------
 
@@ -634,11 +784,20 @@ CREATE TABLE `lar_stocks` (
 --
 
 INSERT INTO `lar_stocks` (`id`, `menu_id`, `current_quantity`, `unit`, `created_at`, `updated_at`) VALUES
-(1, 2, 14, 'pcs', '2026-01-19 01:13:41', '2026-02-16 19:06:36'),
-(2, 1, 0, 'pcs', '2026-01-19 01:28:03', '2026-02-14 21:05:29'),
-(4, 17, 0, 'pcs', '2026-01-19 11:51:43', '2026-02-12 05:00:33'),
-(5, 16, 10, 'pcs', '2026-02-12 07:16:57', '2026-02-12 07:16:57'),
-(6, 8, 3, 'pcs', '2026-02-12 08:55:23', '2026-02-16 19:08:39');
+(7, 1, 10, 'pcs', '2026-02-19 19:26:48', '2026-02-19 19:26:48'),
+(8, 2, 5, 'pcs', '2026-02-19 19:27:14', '2026-02-19 19:27:14'),
+(9, 3, 6, 'pcs', '2026-02-19 19:27:31', '2026-02-19 19:27:31'),
+(10, 4, 8, 'pcs', '2026-02-19 19:27:45', '2026-02-19 19:27:45'),
+(11, 5, 3, 'pcs', '2026-02-19 19:28:02', '2026-02-19 19:28:02'),
+(12, 6, 5, 'pcs', '2026-02-19 19:28:12', '2026-02-19 19:28:12'),
+(13, 7, 4, 'pcs', '2026-02-19 19:28:22', '2026-02-19 20:42:48'),
+(14, 8, 0, 'pcs', '2026-02-19 19:28:34', '2026-02-19 21:02:23'),
+(15, 9, 4, 'pcs', '2026-02-19 19:29:38', '2026-02-19 19:29:38'),
+(16, 10, 4, 'pcs', '2026-02-19 19:30:22', '2026-02-20 10:33:27'),
+(17, 11, 12, 'pcs', '2026-02-19 19:30:32', '2026-02-19 19:30:32'),
+(18, 12, 2, 'pcs', '2026-02-19 19:31:03', '2026-02-19 19:31:03'),
+(19, 13, 2, 'pcs', '2026-02-19 19:31:14', '2026-02-19 19:31:14'),
+(20, 14, 7, 'pcs', '2026-02-19 19:31:29', '2026-02-19 19:31:29');
 
 -- --------------------------------------------------------
 
@@ -700,6 +859,7 @@ CREATE TABLE `lar_users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `role` varchar(50) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
@@ -711,10 +871,11 @@ CREATE TABLE `lar_users` (
 -- Dumping data for table `lar_users`
 --
 
-INSERT INTO `lar_users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(9, 'MAHEDI HASAN', 'afranabir03@gmail.com', NULL, '$2y$12$oU52P7zP2.AudZOhIjdNaedw0bDP7L0drUzBVW./IJc5kQBcOkC5y', NULL, '2026-02-11 01:27:01', '2026-02-11 01:27:01'),
-(10, 'Anamul', 'anamul@gamil.com', NULL, '$2y$12$O04yNYns.PMwKyxqDGWeDu.W8/mxgnYd6pXPR9Fq.ccGrwrR.OP9C', NULL, '2026-02-12 04:35:58', '2026-02-12 04:35:58'),
-(11, 'Pollob', 'pollob@example.com', NULL, '$2y$12$Ga/6ULARX7MRXt3xtN7qDe4fq6Oc6TLLBuN51qvCJM7wjo9.nv/BS', NULL, '2026-02-16 14:08:01', '2026-02-16 14:08:01');
+INSERT INTO `lar_users` (`id`, `name`, `email`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(9, 'MAHEDI HASAN', 'afranabir03@gmail.com', 'Admin', NULL, '$2y$12$oU52P7zP2.AudZOhIjdNaedw0bDP7L0drUzBVW./IJc5kQBcOkC5y', NULL, '2026-02-11 01:27:01', '2026-02-19 17:29:42'),
+(10, 'Anamul', 'anamul@gamil.com', 'Manager', NULL, '$2y$12$O04yNYns.PMwKyxqDGWeDu.W8/mxgnYd6pXPR9Fq.ccGrwrR.OP9C', NULL, '2026-02-12 04:35:58', '2026-02-19 17:29:42'),
+(11, 'Pollob', 'pollob@example.com', 'Cashier', NULL, '$2y$12$Ga/6ULARX7MRXt3xtN7qDe4fq6Oc6TLLBuN51qvCJM7wjo9.nv/BS', NULL, '2026-02-16 14:08:01', '2026-02-19 17:29:42'),
+(17, 'Abdullah', 'abdullah@gmail.com', 'Kitchen Staff', NULL, '$2y$12$BvYrLPKWfycPXaVGYroXye6TmhoFFu.o.JChyEXlQ6jXXEAZfsW1m', NULL, '2026-02-19 18:03:50', '2026-02-19 18:03:50');
 
 --
 -- Indexes for dumped tables
@@ -816,13 +977,28 @@ ALTER TABLE `lar_migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `lar_model_has_permissions`
+--
+ALTER TABLE `lar_model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `lar_model_has_roles`
+--
+ALTER TABLE `lar_model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
 -- Indexes for table `lar_orders`
 --
 ALTER TABLE `lar_orders`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `lar_orders_order_no_unique` (`order_no`),
   ADD KEY `lar_orders_customer_id_status_index` (`customer_id`,`status`),
-  ADD KEY `lar_orders_restaurant_id_ordered_at_index` (`restaurant_id`,`ordered_at`);
+  ADD KEY `lar_orders_restaurant_id_ordered_at_index` (`restaurant_id`,`ordered_at`),
+  ADD KEY `lar_orders_table_id_foreign` (`table_id`);
 
 --
 -- Indexes for table `lar_order_items`
@@ -837,6 +1013,13 @@ ALTER TABLE `lar_order_items`
 --
 ALTER TABLE `lar_password_reset_tokens`
   ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `lar_permissions`
+--
+ALTER TABLE `lar_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `lar_permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
 -- Indexes for table `lar_personal_access_tokens`
@@ -879,6 +1062,28 @@ ALTER TABLE `lar_purchase_order_items`
 --
 ALTER TABLE `lar_restaurants`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lar_restaurant_tables`
+--
+ALTER TABLE `lar_restaurant_tables`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `lar_restaurant_tables_restaurant_id_name_unique` (`restaurant_id`,`name`),
+  ADD KEY `lar_restaurant_tables_status_index` (`status`);
+
+--
+-- Indexes for table `lar_roles`
+--
+ALTER TABLE `lar_roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `lar_roles_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indexes for table `lar_role_has_permissions`
+--
+ALTER TABLE `lar_role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `lar_role_has_permissions_role_id_foreign` (`role_id`);
 
 --
 -- Indexes for table `lar_sessions`
@@ -973,25 +1178,31 @@ ALTER TABLE `lar_menus`
 -- AUTO_INCREMENT for table `lar_migrations`
 --
 ALTER TABLE `lar_migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `lar_orders`
 --
 ALTER TABLE `lar_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `lar_order_items`
 --
 ALTER TABLE `lar_order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `lar_permissions`
+--
+ALTER TABLE `lar_permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `lar_personal_access_tokens`
 --
 ALTER TABLE `lar_personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `lar_products`
@@ -1018,10 +1229,22 @@ ALTER TABLE `lar_restaurants`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `lar_restaurant_tables`
+--
+ALTER TABLE `lar_restaurant_tables`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `lar_roles`
+--
+ALTER TABLE `lar_roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `lar_stocks`
 --
 ALTER TABLE `lar_stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `lar_stock_transactions`
@@ -1039,18 +1262,31 @@ ALTER TABLE `lar_suppliers`
 -- AUTO_INCREMENT for table `lar_users`
 --
 ALTER TABLE `lar_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `lar_model_has_permissions`
+--
+ALTER TABLE `lar_model_has_permissions`
+  ADD CONSTRAINT `lar_model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `lar_permissions` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `lar_model_has_roles`
+--
+ALTER TABLE `lar_model_has_roles`
+  ADD CONSTRAINT `lar_model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `lar_roles` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `lar_orders`
 --
 ALTER TABLE `lar_orders`
   ADD CONSTRAINT `lar_orders_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `lar_customers` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `lar_orders_restaurant_id_foreign` FOREIGN KEY (`restaurant_id`) REFERENCES `lar_restaurants` (`id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `lar_orders_restaurant_id_foreign` FOREIGN KEY (`restaurant_id`) REFERENCES `lar_restaurants` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `lar_orders_table_id_foreign` FOREIGN KEY (`table_id`) REFERENCES `lar_restaurant_tables` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `lar_order_items`
@@ -1080,6 +1316,19 @@ ALTER TABLE `lar_purchase_orders`
 ALTER TABLE `lar_purchase_order_items`
   ADD CONSTRAINT `lar_purchase_order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `lar_products` (`id`),
   ADD CONSTRAINT `lar_purchase_order_items_purchase_order_id_foreign` FOREIGN KEY (`purchase_order_id`) REFERENCES `lar_purchase_orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `lar_restaurant_tables`
+--
+ALTER TABLE `lar_restaurant_tables`
+  ADD CONSTRAINT `lar_restaurant_tables_restaurant_id_foreign` FOREIGN KEY (`restaurant_id`) REFERENCES `lar_restaurants` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `lar_role_has_permissions`
+--
+ALTER TABLE `lar_role_has_permissions`
+  ADD CONSTRAINT `lar_role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `lar_permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `lar_role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `lar_roles` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `lar_stocks`
