@@ -25,7 +25,7 @@
         >
             ← Back
         </a>
-        @if($order->status == 'ready')
+        @if(in_array($order->status, ['pending','confirmed']))
         @role('Manager')
         <form method="POST" action="{{ route('orders.approve', $order->id) }}" class="d-inline">
             @csrf
@@ -34,8 +34,8 @@
         </form>
         @endrole
         @endif
-        @role('Manager')
         @if(in_array($order->status, ['pending','confirmed','preparing','ready','approved']))
+        @can('orders.cancel')
         <form method="POST" action="{{ route('orders.cancel', $order->id) }}" class="d-inline">
             @csrf
             @method('PATCH')
@@ -43,8 +43,8 @@
                 <i class="fas fa-times-circle"></i> Cancel
             </button>
         </form>
+        @endcan
         @endif
-        @endrole
     </div>
 
 </div>

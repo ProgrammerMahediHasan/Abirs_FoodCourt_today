@@ -12,7 +12,7 @@ class CashierDashboardController extends Controller
     {
         $today = Carbon::today();
         $approvedToday = Order::whereDate('updated_at', $today)->where('status', 'approved')->count();
-        $pendingPayments = Order::where('status', 'approved')->where(function($q){
+        $pendingPayments = Order::where('status', 'ready')->where(function($q){
             $q->whereNull('payment_status')->orWhere('payment_status', '!=', 'paid');
         })->count();
         $paidToday = Order::whereDate('updated_at', $today)->where('payment_status', 'paid')->count();
@@ -24,7 +24,7 @@ class CashierDashboardController extends Controller
             ->get();
 
         $pendingPaymentOrders = Order::with(['customer','restaurant'])
-            ->where('status', 'approved')
+            ->where('status', 'ready')
             ->where(function($q){
                 $q->whereNull('payment_status')->orWhere('payment_status', '!=', 'paid');
             })

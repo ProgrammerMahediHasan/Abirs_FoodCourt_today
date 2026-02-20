@@ -127,7 +127,7 @@ class OrderController extends Controller
                 RestaurantTable::where('id', $order->table_id)->update(['status' => 'occupied']);
             }
             DB::commit();
-            return redirect()->route('orders.index')->with('success', 'Order placed successfully');
+            return redirect()->route('orders.index')->with('success', 'Order placed successfully; now the manager will approve it.');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors($e->getMessage());
@@ -163,7 +163,7 @@ class OrderController extends Controller
     // PAYMENT FORM (after order confirmed)
     public function makePaymentForm(Order $order)
     {
-        if ($order->status != 'approved') return back()->withErrors('Order must be approved before payment.');
+        if ($order->status != 'ready') return back()->withErrors('Order must be ready before payment.');
         return view('pages.erp.orders.payment', compact('order'));
     }
 
@@ -221,28 +221,37 @@ class OrderController extends Controller
         $request->validate([
             'status' => 'required|in:pending,confirmed,preparing,ready,approved,delivered,cancelled'
         ]);
-        $updated = $order->changeStatus($request->status);
-        if (!$updated) {
-            return back()->withErrors('Invalid status update.');
+        $next = $request->status;
+
+        // Enforce workflow: approved → preparing → ready → payment → delivered
+        if ($next === 'approved') {
+            return back()->withErrors('Use the Approve action for this step.');
         }
+        if ($next === 'preparing' && $order->status !== 'approved') {
+            return back()->withErrors('Order must be approved before preparing.');
+        }
+        if ($next === 'ready' && $order->status !== 'preparing') {
+            return back()->withErrors('Order must be preparing before marking ready.');
+        }
+
+        $updated = $order->changeStatus($next);
+        if (!$updated) return back()->withErrors('Invalid status update.');
         if ($request->status === 'delivered') {
-            $invoiceToken = 'INV-' . now()->format('Ymd') . '-' . Str::upper(Str::random(5));
-            $order->update(['invoice_token' => $invoiceToken]);
-            // On checkout/finish free the table if dine-in
-            if ($order->order_type === 'dine_in' && $order->table_id && Schema::hasTable('restaurant_tables')) {
-                RestaurantTable::where('id', $order->table_id)->update(['status' => 'available']);
-            }
-            return redirect()->route('orders.invoice', $order->id)
-                ->with('success', 'Order delivered. Invoice generated.');
+            return back()->withErrors('Delivery is completed by Cashier after payment.');
+        }
+        if ($request->status === 'ready') {
+            return back()->with('success', 'Now order is ready for payment to Cashier');
         }
         return back()->with('success', 'Order status updated to ' . $request->status . '.');
     }
 
     public function approve(Order $order)
     {
-        if ($order->status !== 'ready') return back()->withErrors('Only ready orders can be approved.');
+        if (!in_array($order->status, ['pending', 'confirmed'])) {
+            return back()->withErrors('Only pending/confirmed orders can be approved by Admin/Manager.');
+        }
         $order->update(['status' => 'approved']);
-        return back()->with('success', 'Order approved. Proceed to payment.');
+        return back()->with('success', 'Order approved. Send to Kitchen for preparation.');
     }
 
     // SHOW INVOICE
@@ -257,19 +266,7 @@ class OrderController extends Controller
         if (in_array($order->status, ['cancelled'])) {
             return back()->with('success', 'Order already cancelled.');
         }
-        $user = auth()->user();
-        $isManager = false;
-        try {
-            $stored = strtolower(trim($user->role ?? ''));
-            if ($stored === 'manager') {
-                $isManager = true;
-            } elseif (method_exists($user, 'hasRole') && $user->hasRole('Manager')) {
-                $isManager = true;
-            }
-        } catch (\Throwable $e) {}
-        if (!$isManager) {
-            return back()->withErrors('Only manager can cancel orders.');
-        }
+        // Authorization handled by route permission middleware (orders.cancel)
         if ($order->status === 'delivered') {
             return back()->withErrors('Delivered orders cannot be cancelled.');
         }

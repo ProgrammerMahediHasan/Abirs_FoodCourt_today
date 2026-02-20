@@ -15,7 +15,7 @@ class KitchenDashboardController extends Controller
         $ready = Order::whereDate('created_at', $today)->where('status', 'ready')->count();
 
         $orders = Order::with(['customer', 'items.menu', 'restaurant'])
-            ->whereIn('status', ['pending','confirmed','preparing','ready'])
+            ->whereIn('status', ['approved','preparing','ready'])
             ->orderBy('updated_at', 'desc')
             ->paginate(12);
 

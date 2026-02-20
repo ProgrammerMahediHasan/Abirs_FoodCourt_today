@@ -91,18 +91,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('index')->middleware('permission:orders.view');
         Route::get('/create', [OrderController::class, 'create'])->name('create')->middleware('can:manage.orders');
         Route::post('/store', [OrderController::class, 'store'])->name('store')->middleware('can:manage.orders');
-        Route::get('/{order}/edit', [OrderController::class, 'edit'])->name('edit')->middleware('permission:orders.view');
+        Route::get('/{order}/edit', [OrderController::class, 'edit'])->name('edit')->middleware('permission:orders.confirm');
         Route::get('/{order}', [OrderController::class, 'show'])->name('show')->middleware('permission:orders.view')->whereNumber('order');
 
         // ✅ Confirm order
-        Route::patch('/{order}/confirm', [OrderController::class, 'confirm'])->name('confirm')->middleware('can:manage.orders');
+        Route::patch('/{order}/confirm', [OrderController::class, 'confirm'])->name('confirm')->middleware('permission:orders.confirm');
 
         // ✅ Payment routes
-        Route::get('/{order}/payment', [OrderController::class, 'makePaymentForm'])->name('payment.form')->middleware('can:manage.payment');
-        Route::post('/{order}/payment', [OrderController::class, 'processPayment'])->name('payment.process')->middleware('can:manage.payment');
+        Route::get('/{order}/payment', [OrderController::class, 'makePaymentForm'])->name('payment.form')->middleware('permission:payment.process');
+        Route::post('/{order}/payment', [OrderController::class, 'processPayment'])->name('payment.process')->middleware('permission:payment.process');
 
-        Route::patch('/{order}/cancel', [OrderController::class, 'cancel'])->name('cancel')->middleware('can:manage.cancel');
-        Route::delete('/{order}', [OrderController::class, 'destroy'])->name('destroy')->middleware('role:Admin');
+        Route::patch('/{order}/cancel', [OrderController::class, 'cancel'])->name('cancel')->middleware('permission:orders.cancel');
+        Route::delete('/{order}', [OrderController::class, 'destroy'])->name('destroy')->middleware('permission:orders.delete');
 
 
         Route::get('/orders', [PaymentController::class, 'index'])
@@ -113,8 +113,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{order}/invoice', [OrderController::class, 'invoice'])->name('invoice')->middleware('permission:orders.view');
 
         // Optional: Change status
-        Route::patch('/{order}/status', [OrderController::class, 'changeStatus'])->name('status')->middleware('can:manage.prepare');
-        Route::patch('/{order}/approve', [OrderController::class, 'approve'])->name('approve')->middleware('can:manage.approve');
+        Route::patch('/{order}/status', [OrderController::class, 'changeStatus'])->name('status')->middleware('permission:orders.prepare');
+        Route::patch('/{order}/approve', [OrderController::class, 'approve'])->name('approve')->middleware('permission:orders.approve');
 
         // Reports: Delivered Invoices
         Route::get('/reports/delivered', [OrderController::class, 'deliveredReport'])->name('reports.delivered')->middleware('permission:reports.view');

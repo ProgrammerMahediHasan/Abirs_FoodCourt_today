@@ -14,6 +14,9 @@ class AdminPermissionController extends Controller
         $modules = [
             ['key' => 'orders.prepare', 'label' => 'Kitchen Prepare'],
             ['key' => 'orders.approve', 'label' => 'Order Approve'],
+            ['key' => 'orders.confirm', 'label' => 'Order Confirm/Edit'],
+            ['key' => 'orders.cancel', 'label' => 'Order Cancel'],
+            ['key' => 'orders.delete', 'label' => 'Order Delete'],
             ['key' => 'payment.process', 'label' => 'Payment'],
             ['key' => 'orders.view', 'label' => 'Invoice'],
             ['key' => 'reports.view', 'label' => 'Reports'],

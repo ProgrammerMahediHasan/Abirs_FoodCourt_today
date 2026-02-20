@@ -30,7 +30,7 @@
                 <div class="badge">Access Denied</div>
             </div>
             <div class="content">
-                <div>Sorry! You do not have permission to access this page.</div>
+                <div>Sorry!You do not have permission to access this page.</div>
                 {{-- <div class="small">If you believe this is a mistake, please contact your administrator.</div> --}}
             </div>
             <div class="actions">

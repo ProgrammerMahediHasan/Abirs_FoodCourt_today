@@ -38,7 +38,7 @@ Welcome to Abir's FoodCourt
         <button type="submit" class="btn btn-success">Confirm Order</button>
     </form>
 
-    @if($order->status == 'approved' && $order->payment_status !== 'paid')
+    @if($order->status == 'ready' && $order->payment_status !== 'paid')
         @can('manage.payment')
         <a href="{{ route('orders.payment.form', $order->id) }}" class="btn btn-warning mt-3">Make Payment</a>
         @endcan

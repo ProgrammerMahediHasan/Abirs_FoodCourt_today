@@ -142,8 +142,8 @@ public function boot()
     Gate::define('manage.cancel', function ($user) {
         try {
             $stored = strtolower(trim($user->role ?? ''));
-            if ($stored === 'manager') return true;
-            if (method_exists($user, 'hasRole') && $user->hasRole('Manager')) return true;
+            if (in_array($stored, ['manager','admin'])) return true;
+            if (method_exists($user, 'hasRole') && ($user->hasRole('Manager') || $user->hasRole('Admin'))) return true;
         } catch (\Throwable $e) {}
         return false;
     });

@@ -9,7 +9,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('status', 'approved')->orderBy('ordered_at', 'desc')->get();
+        $orders = Order::where('status', 'ready')->orderBy('ordered_at', 'desc')->get();
 
         return view('pages.erp.payments.index', compact('orders'));
     }

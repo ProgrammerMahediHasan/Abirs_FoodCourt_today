@@ -37,6 +37,17 @@
     </div>
     </div>
 
+@if(session('success'))
+<div class="alert alert-success mt-2" role="alert">
+    {{ session('success') }}
+    </div>
+@endif
+@if($errors->any())
+<div class="alert alert-danger mt-2" role="alert">
+    {{ $errors->first() }}
+    </div>
+@endif
+
 <div class="panel">
     <div class="panel-head">
         <div class="fw-bold">Active Orders</div>
@@ -66,8 +77,8 @@
                 @endforeach
             </div>
             <div class="order-actions">
-                @can('orders.status')
-                    @if(in_array($order->status, ['pending','confirmed']))
+                @can('orders.prepare')
+                    @if($order->status === 'approved')
                     <form method="POST" action="{{ route('orders.status', $order->id) }}">
                         @method('PATCH') @csrf
                         <input type="hidden" name="status" value="preparing">

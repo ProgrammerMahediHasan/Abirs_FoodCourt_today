@@ -446,11 +446,13 @@ $completionRate = $completionRate ?? 0;
                     <i class="fas fa-eye me-1"></i>View
                 </a>
                 @if($order->status == 'pending')
+                @role('Admin')
                 <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-sm btn-success ms-2">
                     <i class="fas fa-check me-1"></i>Confirm
                 </a>
+                @endrole
                 @endif
-                @if($order->status == 'ready')
+                @if(in_array($order->status, ['pending','confirmed']))
                 @can('orders.approve')
                 <form method="POST" action="{{ route('orders.approve', $order->id) }}" class="d-inline ms-2">
                     @method('PATCH') @csrf
