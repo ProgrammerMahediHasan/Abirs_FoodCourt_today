@@ -116,7 +116,7 @@ Welcome to Abir's FoodCourt
                         @endif
 
                         @if($order->status == 'pending')
-                            @unlessrole('Cashier')
+                            @unlessrole('Manager')
                             <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-success btn-sm" title="Edit/Confirm">
                                 <i class="fas fa-edit"></i>
                             </a>

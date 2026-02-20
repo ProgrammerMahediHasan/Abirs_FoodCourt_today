@@ -17,18 +17,18 @@ class DashboardController extends Controller
     /**
      * Show dashboard with statistics
      */
-   public function index()
+  public function index()
 {
     if (auth()->check()) {
         $u = auth()->user();
-        if (($u->role ?? null) === 'Kitchen Staff' || (method_exists($u,'hasRole') && $u->hasRole('Kitchen Staff'))) {
-            return redirect()->route('kitchen.dashboard');
-        }
         if (($u->role ?? null) === 'Manager' || (method_exists($u,'hasRole') && $u->hasRole('Manager'))) {
             return redirect()->route('manager.dashboard');
         }
         if (($u->role ?? null) === 'Cashier' || (method_exists($u,'hasRole') && $u->hasRole('Cashier'))) {
             return redirect()->route('cashier.dashboard');
+        }
+        if (($u->role ?? null) === 'Kitchen Staff' || (method_exists($u,'hasRole') && $u->hasRole('Kitchen Staff'))) {
+            return redirect()->route('kitchen.dashboard');
         }
     }
 
@@ -194,8 +194,8 @@ class DashboardController extends Controller
                     DB::raw('COUNT(DISTINCT order_items.order_id) as order_count')
                 )
                 ->groupBy('menus.id', 'menus.name', 'menus.price')
+                ->havingRaw('COALESCE(SUM(order_items.quantity), 0) > 5')
                 ->orderByDesc('total_ordered')
-                ->limit($limit)
                 ->get();
         } catch (\Exception $e) {
             \Log::error('Popular Menus Error: ' . $e->getMessage());

@@ -32,13 +32,11 @@ Welcome to Abir's FoodCourt
     <p><strong>Subtotal:</strong> ৳{{ number_format($order->subtotal,2) }}</p>
     <p><strong>Total:</strong> ৳{{ number_format($order->total,2) }}</p>
 
-    @unlessrole('Cashier')
     <form method="POST" action="{{ route('orders.confirm', $order->id) }}" onsubmit="return confirm('Approve and confirm this order?');">
         @csrf
         @method('PATCH')
         <button type="submit" class="btn btn-success">Confirm Order</button>
     </form>
-    @endunlessrole
 
     @if($order->status == 'approved' && $order->payment_status !== 'paid')
         @can('manage.payment')

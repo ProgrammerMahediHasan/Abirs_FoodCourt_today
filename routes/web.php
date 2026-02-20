@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/kitchen', [KitchenDashboardController::class, 'index'])->middleware('role:Kitchen Staff')->name('kitchen.dashboard');
     Route::get('/manager', [ManagerDashboardController::class, 'index'])->middleware('role:Manager')->name('manager.dashboard');
     Route::get('/cashier', [\App\Http\Controllers\CashierDashboardController::class, 'index'])->middleware('role:Cashier')->name('cashier.dashboard');
+    //
     Route::post('/users/{user}/role', [UserRoleController::class, 'update'])->middleware('can:manage.users')->name('users.role.update');
     Route::resource('roles', RoleController::class)->middleware('can:manage.users');
     Route::resource('users', UserController::class)->middleware('can:manage.users');
@@ -89,8 +90,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{order}/edit', [OrderController::class, 'edit'])->name('edit')->middleware('permission:orders.view');
         Route::get('/{order}', [OrderController::class, 'show'])->name('show')->middleware('permission:orders.view')->whereNumber('order');
 
-        // ✅ Confirm order (Manager-only)
-        Route::patch('/{order}/confirm', [OrderController::class, 'confirm'])->name('confirm')->middleware('role:Manager');
+        // ✅ Confirm order
+        Route::patch('/{order}/confirm', [OrderController::class, 'confirm'])->name('confirm')->middleware('can:manage.orders');
 
         // ✅ Payment routes
         Route::get('/{order}/payment', [OrderController::class, 'makePaymentForm'])->name('payment.form')->middleware('can:manage.payment');

@@ -205,8 +205,18 @@
                     @csrf
 
                     <div class="form-group">
+                        <label>Select Username</label>
+                        <select id="usernameSelect" style="width:100%;padding:15px 18px;border:2px solid #f1f1f1;border-radius:10px;font-size:15px;background-color:#fafafa;">
+                            <option value="">Choose a username</option>
+                            @foreach($usernames as $u)
+                                <option value="{{ $u->name }}">{{ $u->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name="name" placeholder="Enter your username" required autofocus>
+                        <input id="usernameInput" type="text" name="name" placeholder="Enter your username" required autofocus>
                     </div>
 
                     <div class="form-group">
@@ -227,4 +237,14 @@
     </div>
 
 </body>
+<script>
+    const sel = document.getElementById('usernameSelect');
+    const inp = document.getElementById('usernameInput');
+    if (sel && inp) {
+        sel.addEventListener('change', function() {
+            inp.value = this.value || '';
+            if (inp.value) inp.focus();
+        });
+    }
+</script>
 </html>

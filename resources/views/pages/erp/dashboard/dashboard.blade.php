@@ -117,17 +117,33 @@ $completionRate = $completionRate ?? 0;
         <div class="col-xl-6 col-lg-6 mb-4">
             <div class="card p-3">
                 <h5 class="mb-3">Popular Items</h5>
-                @if(($popularMenus ?? collect([]))->isEmpty())
+                @php $list = ($popularMenus ?? collect([])); @endphp
+                @if($list->isEmpty())
                     <div class="text-muted">No data</div>
                 @else
+                    @php $top = $list->first(); $rest = $list->slice(1); @endphp
+                    <div class="border rounded p-3 mb-3 d-flex align-items-center justify-content-between" style="background:#fff7f2;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:44px;height:44px;background:#ffefe6;">
+                                <i class="fas fa-crown text-warning"></i>
+                            </div>
+                            <div>
+                                <div class="fw-semibold">Top Selling: {{ $top->name }}</div>
+                                <div class="text-muted small">{{ $top->total_ordered }} sold</div>
+                            </div>
+                        </div>
+                        <span class="badge bg-primary">#1</span>
+                    </div>
+                    @if($rest->isNotEmpty())
                     <ul class="list-group list-group-flush">
-                        @foreach($popularMenus as $pm)
+                        @foreach($rest as $pm)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <span>{{ $pm->name }}</span>
                                 <span class="badge bg-primary">{{ $pm->total_ordered }} sold</span>
                             </li>
                         @endforeach
                     </ul>
+                    @endif
                 @endif
             </div>
         </div>
