@@ -325,11 +325,34 @@ class OrderController extends Controller
 
     public function deliveredReport(Request $request)
     {
-        $orders = Order::with('customer')
-            ->where('status', 'delivered')
-            ->orderByDesc('updated_at')
-            ->paginate(20);
+        $query = Order::with('customer')->where('status', 'delivered');
 
-        return view('pages.erp.reports.delivered_invoices', compact('orders'));
+        if ($request->filled('search')) {
+            $search = trim($request->search);
+            $query->where(function ($q) use ($search) {
+                $q->where('order_no', 'like', '%' . $search . '%')
+                    ->orWhere('invoice_token', 'like', '%' . $search . '%')
+                    ->orWhereHas('customer', function ($cq) use ($search) {
+                        $cq->where('name', 'like', '%' . $search . '%')
+                            ->orWhere('phone', 'like', '%' . $search . '%');
+                    });
+            });
+        }
+        if ($request->filled('payment')) {
+            $query->where('payment_method', $request->payment);
+        }
+        if ($request->filled('date_from')) {
+            $query->whereDate('updated_at', '>=', $request->date_from);
+        }
+        if ($request->filled('date_to')) {
+            $query->whereDate('updated_at', '<=', $request->date_to);
+        }
+
+        $summaryCount = (clone $query)->count();
+        $summaryAmount = (clone $query)->sum('total');
+
+        $orders = $query->orderByDesc('updated_at')->paginate(20)->withQueryString();
+
+        return view('pages.erp.reports.delivered_invoices', compact('orders', 'summaryCount', 'summaryAmount'));
     }
 }

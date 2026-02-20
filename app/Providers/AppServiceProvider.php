@@ -50,9 +50,8 @@ public function boot()
         try {
             $stored = strtolower(trim($user->role ?? ''));
             if ($stored === 'admin') return true;
-            if (method_exists($user, 'hasRole')) {
-                if ($user->hasRole('Admin')) return true;
-            }
+            if (method_exists($user, 'hasRole') && $user->hasRole('Admin')) return true;
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('inventory.view')) return true;
         } catch (\Throwable $e) {}
         return false;
     });
@@ -77,30 +76,66 @@ public function boot()
     Gate::define('manage.customer', function ($user) {
         try {
             $stored = strtolower(trim($user->role ?? ''));
-            if (in_array($stored, ['admin','cashier'])) return true;
-            if (method_exists($user, 'hasRole')) {
-                if ($user->hasRole('Admin') || $user->hasRole('Cashier')) return true;
-            }
+            if ($stored === 'admin') return true;
+            if (method_exists($user, 'hasRole') && $user->hasRole('Admin')) return true;
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('customer.manage')) return true;
         } catch (\Throwable $e) {}
         return false;
     });
     Gate::define('manage.payment', function ($user) {
         try {
             $stored = strtolower(trim($user->role ?? ''));
-            if (in_array($stored, ['admin','cashier'])) return true;
-            if (method_exists($user, 'hasRole')) {
-                if ($user->hasRole('Admin') || $user->hasRole('Cashier')) return true;
-            }
+            if ($stored === 'admin') return true;
+            if (method_exists($user, 'hasRole') && $user->hasRole('Admin')) return true;
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('payment.process')) return true;
         } catch (\Throwable $e) {}
         return false;
     });
     Gate::define('manage.approve', function ($user) {
         try {
             $stored = strtolower(trim($user->role ?? ''));
-            if (in_array($stored, ['manager'])) return true;
-            if (method_exists($user, 'hasRole')) {
-                if ($user->hasRole('Manager')) return true;
+            if ($stored === 'manager') {
+                if (method_exists($user, 'hasPermissionTo')) {
+                    return $user->hasPermissionTo('orders.approve');
+                }
+                return true;
             }
+            if (method_exists($user, 'hasRole') && $user->hasRole('Manager')) {
+                if (method_exists($user, 'hasPermissionTo')) {
+                    return $user->hasPermissionTo('orders.approve');
+                }
+                return true;
+            }
+        } catch (\Throwable $e) {}
+        return false;
+    });
+    Gate::define('manage.menus', function ($user) {
+        try {
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('menus.manage')) return true;
+        } catch (\Throwable $e) {}
+        return false;
+    });
+    Gate::define('manage.categories', function ($user) {
+        try {
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('categories.manage')) return true;
+        } catch (\Throwable $e) {}
+        return false;
+    });
+    Gate::define('manage.restaurants', function ($user) {
+        try {
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('restaurants.manage')) return true;
+        } catch (\Throwable $e) {}
+        return false;
+    });
+    Gate::define('manage.tables', function ($user) {
+        try {
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('tables.manage')) return true;
+        } catch (\Throwable $e) {}
+        return false;
+    });
+    Gate::define('manage.stocks', function ($user) {
+        try {
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('stocks.manage')) return true;
         } catch (\Throwable $e) {}
         return false;
     });
@@ -109,6 +144,19 @@ public function boot()
             $stored = strtolower(trim($user->role ?? ''));
             if ($stored === 'manager') return true;
             if (method_exists($user, 'hasRole') && $user->hasRole('Manager')) return true;
+        } catch (\Throwable $e) {}
+        return false;
+    });
+    Gate::define('manage.prepare', function ($user) {
+        try {
+            $stored = strtolower(trim($user->role ?? ''));
+            if ($stored === 'kitchen staff' || ($user->hasRole ?? fn()=>false)('Kitchen Staff')) {
+                if (method_exists($user, 'hasPermissionTo')) {
+                    return $user->hasPermissionTo('orders.prepare');
+                }
+                return false;
+            }
+            if (method_exists($user, 'hasPermissionTo') && $user->hasPermissionTo('orders.prepare')) return true;
         } catch (\Throwable $e) {}
         return false;
     });

@@ -121,7 +121,7 @@ Welcome to Abir's FoodCourt
 <!-- Buttons -->
 <div class="text-center mt-3">
     <button onclick="printInvoice()" class="btn" style="background-color:coral;color:white">🖨 Print Invoice</button>
-    <a href="{{ route('orders.index') }}" class="btn" style="background-color:coral;color:white">← Back to Orders</a>
+    <a href="{{ request('from')==='delivered_report' ? route('orders.reports.delivered') : route('orders.index') }}" class="btn" style="background-color:coral;color:white">← Back</a>
 </div>
 
 <script>

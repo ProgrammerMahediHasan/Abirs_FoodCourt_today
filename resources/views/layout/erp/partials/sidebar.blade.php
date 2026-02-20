@@ -30,7 +30,7 @@
         </ul>
     </li>
     @endcan
-    @can('manage.basic')
+    @canany(['manage.categories','manage.menus'])
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Menu & Category</span>
@@ -38,14 +38,14 @@
         <ul aria-expanded="false">
             {{-- <li><a href="{{('/')}}">Dashboard</a>
     </li> --}}
-    <li><a href="{{asset('/categories')}}">Categories</a></li>
-    <li><a href="{{asset('/menus')}}">Menu Item</a></li>
+    @can('manage.categories')<li><a href="{{asset('/categories')}}">Categories</a></li>@endcan
+    @can('manage.menus')<li><a href="{{asset('/menus')}}">Menu Item</a></li>@endcan
     {{-- <li><a href="{{('/order')}}">Order</a></li>
     <li><a href="{{('/order_list')}}">order-list</a></li>
     <li><a href="{{('/customer_list')}}">customer-list</a></li> --}}
     </ul>
     </li>
-    @endcan
+    @endcanany
 
 
 
@@ -65,17 +65,17 @@
     @endcan
 
     {{-- Restaurant Module  --}}
-    @can('manage.basic')
+    @canany(['manage.restaurants','manage.tables'])
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Restaurants</span>
         </a>
         <ul aria-expanded="false">
-            <li><a href="{{asset('/restaurants')}}">Add Restaurant</a></li>
-            <li><a href="{{ route('tables.index') }}">Tables</a></li>
+            @can('manage.restaurants')<li><a href="{{asset('/restaurants')}}">Add Restaurant</a></li>@endcan
+            @can('manage.tables')<li><a href="{{ route('tables.index') }}">Tables</a></li>@endcan
         </ul>
     </li>
-    @endcan
+    @endcanany
 
 
 
@@ -96,7 +96,7 @@
     </li> --}}
 
     {{-- Product/Inventory Module  --}}
-    @can('manage.basic')
+    @can('manage.stocks')
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Stocks Inventory</span>
@@ -108,6 +108,7 @@
     @endcan
 
 
+    @unlessrole('Kitchen Staff')
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Order & Billing</span>
@@ -115,12 +116,9 @@
         <ul aria-expanded="false">
             <li><a href="{{asset('/orders')}}">Order </a></li>
             <li><a href="{{ route('orders.create') }}">Dine-In Order (Table Select)</a></li>
-            {{-- <li><a href="{{('/')}}">Order Items</a>
-    </li> --}}
-    {{-- <li><a href="{{ ('orders') }}">Payment System</a></li> --}}
-
-    </ul>
+        </ul>
     </li>
+    @endunlessrole
 
 
 
@@ -136,7 +134,7 @@
     </li> --}}
 
 
-    @unlessrole('Cashier')
+    @can('reports.view')
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
             <i class="flaticon-dashboard-1"></i>
             <span class="nav-text">Reports</span>
@@ -146,7 +144,7 @@
             {{-- <li><a href="{{ route('reports.customer.items') }}">Customer Order</a></li> --}}
         </ul>
     </li>
-    @endunlessrole
+    @endcan
 
 
     <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
@@ -186,6 +184,16 @@
         </ul>
     </li>
 
+    @can('manage.users')
+    <li><a class="has-arrow ai-icon" href="{{asset('assets')}}/javascript:void()" aria-expanded="false">
+            <i class="flaticon-dashboard-1"></i>
+            <span class="nav-text">Permission Control</span>
+        </a>
+        <ul aria-expanded="false">
+            <li><a href="{{ route('admin.permissions') }}">Manage Permissions</a></li>
+        </ul>
+    </li>
+    @endcan
 
     {{-- <li><a class="has-arrow ai-icon"
                         href="{{asset('assets')}}/javascript:void()" aria-expanded="false">

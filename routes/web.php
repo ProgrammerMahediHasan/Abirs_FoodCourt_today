@@ -21,6 +21,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\AdminPermissionController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\UserRoleController;
@@ -71,13 +72,16 @@ Route::middleware('auth')->group(function () {
     /* ======================
         BASIC RESOURCES
     ======================= */
-    Route::resource('categories', CategoryController::class)->middleware('can:manage.basic');
-    Route::resource('menus', MenuController::class)->middleware('can:manage.basic');
+    Route::resource('categories', CategoryController::class)->middleware('can:manage.categories');
+    Route::resource('menus', MenuController::class)->middleware('can:manage.menus');
     Route::resource('customer', CustomerController::class)->middleware('can:manage.customer');
-    Route::resource('restaurants', RestaurantController::class)->middleware('can:manage.basic');
-    Route::resource('tables', RestaurantTableController::class)->middleware('can:manage.basic');
+    Route::resource('restaurants', RestaurantController::class)->middleware('can:manage.restaurants');
+    Route::resource('tables', RestaurantTableController::class)->middleware('can:manage.tables');
     Route::resource('products', ProductController::class)->middleware('can:manage.basic');
-    Route::resource('stocks', StockController::class)->middleware('can:manage.basic');
+    Route::resource('stocks', StockController::class)->middleware('can:manage.stocks');
+    Route::get('/admin/permissions', [AdminPermissionController::class, 'index'])->name('admin.permissions')->middleware('role:Admin');
+    Route::post('/admin/permissions', [AdminPermissionController::class, 'update'])->name('admin.permissions.update')->middleware('role:Admin');
+    Route::post('/admin/permissions/toggle', [AdminPermissionController::class, 'toggle'])->name('admin.permissions.toggle')->middleware('role:Admin');
 
     /* ======================
         ORDERS (MAIN)
@@ -109,7 +113,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{order}/invoice', [OrderController::class, 'invoice'])->name('invoice')->middleware('permission:orders.view');
 
         // Optional: Change status
-        Route::patch('/{order}/status', [OrderController::class, 'changeStatus'])->name('status')->middleware('role:Kitchen Staff');
+        Route::patch('/{order}/status', [OrderController::class, 'changeStatus'])->name('status')->middleware('can:manage.prepare');
         Route::patch('/{order}/approve', [OrderController::class, 'approve'])->name('approve')->middleware('can:manage.approve');
 
         // Reports: Delivered Invoices

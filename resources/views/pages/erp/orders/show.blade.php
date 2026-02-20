@@ -19,11 +19,11 @@
              Print Orders
         </a>
         <a
-            href="{{ route('orders.index') }}"
+            href="{{ request('from')==='delivered_report' ? route('orders.reports.delivered') : route('orders.index') }}"
             class="btn"
             style="background-color: #FF7F50; border: 1px solid #FF7F50; border-radius: 4px; padding: 8px 16px; text-decoration: none;"
         >
-            ← Back to Orders
+            ← Back
         </a>
         @if($order->status == 'ready')
         @role('Manager')
