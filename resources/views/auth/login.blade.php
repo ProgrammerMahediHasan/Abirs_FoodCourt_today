@@ -205,11 +205,11 @@
                     @csrf
 
                     <div class="form-group">
-                        <label>Select Username</label>
-                        <select id="usernameSelect" style="width:100%;padding:15px 18px;border:2px solid #f1f1f1;border-radius:10px;font-size:15px;background-color:#fafafa;">
-                            <option value="">Choose a username</option>
-                            @foreach($usernames as $u)
-                                <option value="{{ $u->name }}">{{ $u->name }}</option>
+                        <label>Select Role</label>
+                        <select id="roleSelect" style="width:100%;padding:15px 18px;border:2px solid #f1f1f1;border-radius:10px;font-size:15px;background-color:#fafafa;">
+                            <option value="">Choose a role</option>
+                            @foreach($roles as $r)
+                                <option value="{{ $r }}" data-username="{{ $roleUsers[$r] ?? '' }}">{{ $r }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -238,11 +238,13 @@
 
 </body>
 <script>
-    const sel = document.getElementById('usernameSelect');
+    const sel = document.getElementById('roleSelect');
     const inp = document.getElementById('usernameInput');
     if (sel && inp) {
         sel.addEventListener('change', function() {
-            inp.value = this.value || '';
+            const opt = this.selectedOptions && this.selectedOptions[0] ? this.selectedOptions[0] : null;
+            const uname = opt ? opt.getAttribute('data-username') : '';
+            inp.value = uname || '';
             if (inp.value) inp.focus();
         });
     }

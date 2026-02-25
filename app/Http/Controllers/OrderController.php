@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Menu;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Customer;
 use App\Models\Restaurant;
 use App\Models\RestaurantTable;
-use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -24,18 +23,32 @@ class OrderController extends Controller
         if ($request->filled('search')) {
             $search = trim($request->search);
             $query->where(function ($q) use ($search) {
-                $q->where('order_no', 'like', '%' . $search . '%')
+                $q->where('order_no', 'like', '%'.$search.'%')
                     ->orWhereHas('customer', function ($cq) use ($search) {
-                        $cq->where('name', 'like', '%' . $search . '%')
-                            ->orWhere('phone', 'like', '%' . $search . '%');
+                        $cq->where('name', 'like', '%'.$search.'%')
+                            ->orWhere('phone', 'like', '%'.$search.'%');
                     });
             });
         }
 
-        if ($request->status) $query->where('status', $request->status);
-        if ($request->date) $query->whereDate('ordered_at', $request->date);
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('customer_id')) {
+            $query->where('customer_id', $request->customer_id);
+        }
+
+        if ($request->filled('date_from')) {
+            $query->whereDate('ordered_at', '>=', $request->date_from);
+        }
+
+        if ($request->filled('date_to')) {
+            $query->whereDate('ordered_at', '<=', $request->date_to);
+        }
 
         $orders = $query->paginate(10);
+
         return view('pages.erp.orders.index', compact('orders'));
     }
 
@@ -49,6 +62,7 @@ class OrderController extends Controller
         if (Schema::hasTable('restaurant_tables')) {
             $tables = RestaurantTable::where('status', 'available')->orderBy('name')->get();
         }
+
         return view('pages.erp.orders.create', compact('customers', 'restaurants', 'menus', 'tables'));
     }
 
@@ -73,10 +87,12 @@ class OrderController extends Controller
             // If dine-in with a selected table, ensure table is available
             if ($request->order_type === 'dine_in' && $request->filled('table_id') && Schema::hasTable('restaurant_tables')) {
                 $table = RestaurantTable::lockForUpdate()->findOrFail($request->table_id);
-                if ($table->status !== 'available') throw new \Exception("Selected table is not available.");
+                if ($table->status !== 'available') {
+                    throw new \Exception('Selected table is not available.');
+                }
             }
             $order = Order::create([
-                'order_no' => 'ORD-' . time(),
+                'order_no' => 'ORD-'.time(),
                 'customer_id' => $request->customer_id,
                 'restaurant_id' => $request->restaurant_id,
                 'table_id' => $request->order_type === 'dine_in' ? $request->input('table_id') : null,
@@ -127,9 +143,11 @@ class OrderController extends Controller
                 RestaurantTable::where('id', $order->table_id)->update(['status' => 'occupied']);
             }
             DB::commit();
+
             return redirect()->route('orders.index')->with('success', 'Order placed successfully; now the manager will approve it.');
         } catch (\Exception $e) {
             DB::rollBack();
+
             return back()->withErrors($e->getMessage());
         }
     }
@@ -138,6 +156,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order->load('customer', 'restaurant', 'items.menu');
+
         return view('pages.erp.orders.show', compact('order'));
     }
 
@@ -145,13 +164,16 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $order->load('customer', 'restaurant', 'items.menu');
+
         return view('pages.erp.orders.edit', compact('order'));
     }
 
     // CONFIRM ORDER
     public function confirm(Order $order)
     {
-        if ($order->status != 'pending') return back()->withErrors('Only pending orders can be confirmed.');
+        if ($order->status != 'pending') {
+            return back()->withErrors('Only pending orders can be confirmed.');
+        }
 
         $order->update(['status' => 'confirmed']);
 
@@ -163,7 +185,10 @@ class OrderController extends Controller
     // PAYMENT FORM (after order confirmed)
     public function makePaymentForm(Order $order)
     {
-        if ($order->status != 'ready') return back()->withErrors('Order must be ready before payment.');
+        if ($order->status != 'ready') {
+            return back()->withErrors('Order must be ready before payment.');
+        }
+
         return view('pages.erp.orders.payment', compact('order'));
     }
 
@@ -191,7 +216,7 @@ class OrderController extends Controller
                 'payment_method' => $finalMethod,
             ]);
 
-            if (!$wasPaid) {
+            if (! $wasPaid) {
                 $order->load('items.menu.stock');
                 foreach ($order->items as $item) {
                     $menu = $item->menu;
@@ -204,14 +229,16 @@ class OrderController extends Controller
 
         $order->refresh();
         if ($order->payment_status === 'paid' && $order->status !== 'delivered') {
-            $invoiceToken = 'INV-' . now()->format('Ymd') . '-' . Str::upper(Str::random(5));
+            $invoiceToken = 'INV-'.now()->format('Ymd').'-'.Str::upper(Str::random(5));
             $order->update(['status' => 'delivered', 'invoice_token' => $invoiceToken]);
             if ($order->order_type === 'dine_in' && $order->table_id && Schema::hasTable('restaurant_tables')) {
                 RestaurantTable::where('id', $order->table_id)->update(['status' => 'available']);
             }
+
             return redirect()->route('orders.invoice', $order->id)
                 ->with('success', 'Payment done. Order delivered and invoice generated.');
         }
+
         return redirect()->route('orders.edit', $order->id)
             ->with('success', 'Payment completed.');
     }
@@ -219,7 +246,7 @@ class OrderController extends Controller
     public function changeStatus(Request $request, Order $order)
     {
         $request->validate([
-            'status' => 'required|in:pending,confirmed,preparing,ready,approved,delivered,cancelled'
+            'status' => 'required|in:pending,confirmed,preparing,ready,approved,delivered,cancelled',
         ]);
         $next = $request->status;
 
@@ -235,29 +262,36 @@ class OrderController extends Controller
         }
 
         $updated = $order->changeStatus($next);
-        if (!$updated) return back()->withErrors('Invalid status update.');
+        if (! $updated) {
+            return back()->withErrors('Invalid status update.');
+        }
         if ($request->status === 'delivered') {
             return back()->withErrors('Delivery is completed by Cashier after payment.');
         }
         if ($request->status === 'ready') {
             return back()->with('success', 'Now order is ready for payment to Cashier');
         }
-        return back()->with('success', 'Order status updated to ' . $request->status . '.');
+
+        return back()->with('success', 'Order status updated to '.$request->status.'.');
     }
 
     public function approve(Order $order)
     {
-        if (!in_array($order->status, ['pending', 'confirmed'])) {
+        if (! in_array($order->status, ['pending', 'confirmed'])) {
             return back()->withErrors('Only pending/confirmed orders can be approved by Admin/Manager.');
         }
         $order->update(['status' => 'approved']);
+
         return back()->with('success', 'Order approved. Send to Kitchen for preparation.');
     }
 
     // SHOW INVOICE
     public function invoice(Order $order)
     {
-        if (!$order->invoice_token) return back()->withErrors('Invoice not generated yet.');
+        if (! $order->invoice_token) {
+            return back()->withErrors('Invoice not generated yet.');
+        }
+
         return view('pages.erp.orders.invoice', compact('order'));
     }
 
@@ -286,6 +320,7 @@ class OrderController extends Controller
         if ($order->order_type === 'dine_in' && $order->table_id && \Illuminate\Support\Facades\Schema::hasTable('restaurant_tables')) {
             \App\Models\RestaurantTable::where('id', $order->table_id)->update(['status' => 'available']);
         }
+
         return back()->with('success', 'Order cancelled successfully.');
     }
 
@@ -307,6 +342,7 @@ class OrderController extends Controller
             $order->items()->delete();
             $order->delete();
         });
+
         return redirect()->route('orders.index')->with('success', 'Order deleted successfully.');
     }
 
@@ -327,11 +363,11 @@ class OrderController extends Controller
         if ($request->filled('search')) {
             $search = trim($request->search);
             $query->where(function ($q) use ($search) {
-                $q->where('order_no', 'like', '%' . $search . '%')
-                    ->orWhere('invoice_token', 'like', '%' . $search . '%')
+                $q->where('order_no', 'like', '%'.$search.'%')
+                    ->orWhere('invoice_token', 'like', '%'.$search.'%')
                     ->orWhereHas('customer', function ($cq) use ($search) {
-                        $cq->where('name', 'like', '%' . $search . '%')
-                            ->orWhere('phone', 'like', '%' . $search . '%');
+                        $cq->where('name', 'like', '%'.$search.'%')
+                            ->orWhere('phone', 'like', '%'.$search.'%');
                     });
             });
         }

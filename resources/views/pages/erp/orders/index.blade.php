@@ -52,10 +52,20 @@ Welcome to Abir's FoodCourt
     <div class="card mb-3">
         <div class="card-body">
             <form method="GET" action="{{ route('orders.index') }}" class="row g-3" id="ordersFilterForm">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <input type="text" name="search" value="{{ request('search') }}" class="form-control" placeholder="Search by Order No or Customer" id="orderSearchInput">
                 </div>
                 <div class="col-md-3">
+                    <select name="customer_id" class="form-select">
+                        <option value="">All Customers</option>
+                        @foreach(\App\Models\Customer::orderBy('name')->get(['id','name','phone']) as $cust)
+                            <option value="{{ $cust->id }}" @selected(request('customer_id')==$cust->id)>
+                                {{ $cust->name }} ({{ $cust->phone }})
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-2">
                     <select name="status" class="form-select">
                         <option value="">All Status</option>
                         <option value="pending" @selected(request('status')=='pending')>Pending</option>
@@ -66,10 +76,13 @@ Welcome to Abir's FoodCourt
                         <option value="cancelled" @selected(request('status')=='cancelled')>Cancelled</option>
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <input type="date" name="date" value="{{ request('date') }}" class="form-control">
+                <div class="col-md-2">
+                    <input type="date" name="date_from" value="{{ request('date_from') }}" class="form-control" placeholder="From">
                 </div>
-                <div class="col-md-2 d-grid">
+                <div class="col-md-2">
+                    <input type="date" name="date_to" value="{{ request('date_to') }}" class="form-control" placeholder="To">
+                </div>
+                <div class="col-12 col-md-2 d-grid">
                     <button type="submit" class="btn btn-dark">Filter</button>
                 </div>
             </form>

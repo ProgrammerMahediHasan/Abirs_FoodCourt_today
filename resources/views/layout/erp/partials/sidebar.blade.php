@@ -116,6 +116,9 @@
         <ul aria-expanded="false">
             <li><a href="{{asset('/orders')}}">Order </a></li>
             <li><a href="{{ route('orders.create') }}">Dine-In Order (Table Select)</a></li>
+            @hasanyrole('Admin|Manager')
+            <li><a href="{{ route('coupons.index') }}">Coupons</a></li>
+            @endhasanyrole
         </ul>
     </li>
     @endunlessrole

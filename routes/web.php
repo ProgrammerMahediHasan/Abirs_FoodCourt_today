@@ -1,34 +1,30 @@
 <?php
 
-use App\Http\Controllers\AnalysisController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-
-// Controllers
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AdminPermissionController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeController;
+// Controllers
+use App\Http\Controllers\CouponAdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InboxController;
-use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\KitchenDashboardController;
+use App\Http\Controllers\ManagerDashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\StockController;
-use App\Http\Controllers\AdminPermissionController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\RestaurantTableController;
-use App\Http\Controllers\UserRoleController;
-use App\Http\Controllers\KitchenDashboardController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\ManagerDashboardController;
+use App\Http\Controllers\StockController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRoleController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,9 +75,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('tables', RestaurantTableController::class)->middleware('can:manage.tables');
     Route::resource('products', ProductController::class)->middleware('can:manage.basic');
     Route::resource('stocks', StockController::class)->middleware('can:manage.stocks');
+    Route::post('/stocks/{stock}/restock', [StockController::class, 'restock'])->name('stocks.restock')->middleware('can:manage.stocks');
     Route::get('/admin/permissions', [AdminPermissionController::class, 'index'])->name('admin.permissions')->middleware('role:Admin');
     Route::post('/admin/permissions', [AdminPermissionController::class, 'update'])->name('admin.permissions.update')->middleware('role:Admin');
     Route::post('/admin/permissions/toggle', [AdminPermissionController::class, 'toggle'])->name('admin.permissions.toggle')->middleware('role:Admin');
+
+    Route::get('/admin/coupons', [CouponAdminController::class, 'index'])->name('coupons.index')->middleware('permission:coupons.manage');
+    Route::post('/admin/coupons', [CouponAdminController::class, 'store'])->name('coupons.store')->middleware('permission:coupons.manage');
+    Route::post('/admin/coupons/{id}', [CouponAdminController::class, 'update'])->name('coupons.update')->middleware('permission:coupons.manage');
+    Route::delete('/admin/coupons/{id}', [CouponAdminController::class, 'destroy'])->name('coupons.destroy')->middleware('permission:coupons.manage');
 
     /* ======================
         ORDERS (MAIN)
@@ -104,7 +106,6 @@ Route::middleware('auth')->group(function () {
         Route::patch('/{order}/cancel', [OrderController::class, 'cancel'])->name('cancel')->middleware('permission:orders.cancel');
         Route::delete('/{order}', [OrderController::class, 'destroy'])->name('destroy')->middleware('permission:orders.delete');
 
-
         Route::get('/orders', [PaymentController::class, 'index'])
             ->middleware('can:manage.payment')
             ->name('pages.erp.payments.index');
@@ -119,7 +120,6 @@ Route::middleware('auth')->group(function () {
         // Reports: Delivered Invoices
         Route::get('/reports/delivered', [OrderController::class, 'deliveredReport'])->name('reports.delivered')->middleware('permission:reports.view');
     });
-
 
     /* ======================
         DASHBOARD APIs

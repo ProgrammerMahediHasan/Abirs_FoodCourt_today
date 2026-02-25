@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -46,27 +47,36 @@ class LoginController extends Controller
     }
 
     protected function showLoginForm()
-{
-    if (auth()->check()) {
-        return redirect('/dashboard'); // যেকোনো route যেখানে তুমি পাঠাতে চাও
-    }
+    {
+        if (auth()->check()) {
+            return redirect('/dashboard');
+        }
+        $roles = ['Admin', 'Manager', 'Cashier', 'Kitchen Staff'];
+        $roleUsers = [];
+        foreach ($roles as $r) {
+            $byColumn = User::where('role', $r)->orderBy('id')->first();
+            $roleId = DB::table('roles')->where('name', $r)->value('id');
+            $assignedId = $roleId ? DB::table('model_has_roles')->where('role_id', $roleId)->value('model_id') : null;
+            $byAssigned = $assignedId ? User::find($assignedId) : null;
+            $roleUsers[$r] = ($byColumn ?? $byAssigned)?->name ?? '';
+        }
 
-        $usernames = User::query()->select('name')->orderBy('name')->get();
-        return view('auth.login', compact('usernames'));
-}
+        return view('auth.login', compact('roles', 'roleUsers'));
+    }
 
     protected function redirectTo()
     {
         $user = auth()->user();
-        if ($user && ( ($user->role ?? null) === 'Kitchen Staff' || (method_exists($user,'hasRole') && $user->hasRole('Kitchen Staff')) )) {
+        if ($user && (($user->role ?? null) === 'Kitchen Staff' || (method_exists($user, 'hasRole') && $user->hasRole('Kitchen Staff')))) {
             return '/kitchen';
         }
-        if ($user && ( ($user->role ?? null) === 'Manager' || (method_exists($user,'hasRole') && $user->hasRole('Manager')) )) {
+        if ($user && (($user->role ?? null) === 'Manager' || (method_exists($user, 'hasRole') && $user->hasRole('Manager')))) {
             return '/manager';
         }
-        if ($user && ( ($user->role ?? null) === 'Cashier' || (method_exists($user,'hasRole') && $user->hasRole('Cashier')) )) {
+        if ($user && (($user->role ?? null) === 'Cashier' || (method_exists($user, 'hasRole') && $user->hasRole('Cashier')))) {
             return '/cashier';
         }
+
         return '/dashboard';
     }
 
@@ -78,7 +88,7 @@ class LoginController extends Controller
                     $user->assignRole($user->role);
                 }
             }
-        } catch (\Throwable $e) {}
+        } catch (\Throwable $e) {
+        }
     }
-
 }

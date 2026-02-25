@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2026 at 11:38 AM
+-- Generation Time: Feb 24, 2026 at 05:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -131,7 +131,7 @@ CREATE TABLE `lar_cache` (
 --
 
 INSERT INTO `lar_cache` (`key`, `value`, `expiration`) VALUES
-('laravel-cache-spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:9:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:11:\"orders.view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:4:{i:0;i:1;i:1;i:2;i:2;i:3;i:3;i:4;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:13:\"orders.create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:2;a:4:{s:1:\"a\";i:3;s:1:\"b\";s:14:\"orders.payment\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:3;a:4:{s:1:\"a\";i:4;s:1:\"b\";s:12:\"reports.view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:4;a:4:{s:1:\"a\";i:5;s:1:\"b\";s:12:\"staff.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:5;a:4:{s:1:\"a\";i:6;s:1:\"b\";s:13:\"orders.status\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:4;}}i:6;a:4:{s:1:\"a\";i:7;s:1:\"b\";s:14:\"orders.approve\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:7;a:4:{s:1:\"a\";i:8;s:1:\"b\";s:14:\"orders.prepare\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:4;}}i:8;a:4:{s:1:\"a\";i:9;s:1:\"b\";s:15:\"payment.process\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:3;}}}s:5:\"roles\";a:4:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:5:\"Admin\";s:1:\"c\";s:3:\"web\";}i:1;a:3:{s:1:\"a\";i:2;s:1:\"b\";s:7:\"Manager\";s:1:\"c\";s:3:\"web\";}i:2;a:3:{s:1:\"a\";i:3;s:1:\"b\";s:7:\"Cashier\";s:1:\"c\";s:3:\"web\";}i:3;a:3:{s:1:\"a\";i:4;s:1:\"b\";s:13:\"Kitchen Staff\";s:1:\"c\";s:3:\"web\";}}}', 1771666988);
+('laravel-cache-spatie.permission.cache', 'a:3:{s:5:\"alias\";a:4:{s:1:\"a\";s:2:\"id\";s:1:\"b\";s:4:\"name\";s:1:\"c\";s:10:\"guard_name\";s:1:\"r\";s:5:\"roles\";}s:11:\"permissions\";a:20:{i:0;a:4:{s:1:\"a\";i:1;s:1:\"b\";s:11:\"orders.view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:1;a:4:{s:1:\"a\";i:2;s:1:\"b\";s:13:\"orders.create\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:2;a:4:{s:1:\"a\";i:3;s:1:\"b\";s:14:\"orders.payment\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:3;}}i:3;a:4:{s:1:\"a\";i:4;s:1:\"b\";s:12:\"reports.view\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:4;a:4:{s:1:\"a\";i:5;s:1:\"b\";s:12:\"staff.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:5;a:4:{s:1:\"a\";i:6;s:1:\"b\";s:13:\"orders.status\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:3:{i:0;i:1;i:1;i:2;i:2;i:4;}}i:6;a:4:{s:1:\"a\";i:7;s:1:\"b\";s:14:\"orders.approve\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:2;}}i:7;a:4:{s:1:\"a\";i:8;s:1:\"b\";s:14:\"orders.prepare\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:4;}}i:8;a:4:{s:1:\"a\";i:9;s:1:\"b\";s:15:\"payment.process\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:3;}}i:9;a:4:{s:1:\"a\";i:10;s:1:\"b\";s:14:\"orders.confirm\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:10;a:4:{s:1:\"a\";i:11;s:1:\"b\";s:13:\"orders.cancel\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}i:11;a:4:{s:1:\"a\";i:12;s:1:\"b\";s:13:\"orders.delete\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:12;a:4:{s:1:\"a\";i:13;s:1:\"b\";s:12:\"menus.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:13;a:4:{s:1:\"a\";i:14;s:1:\"b\";s:17:\"categories.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:14;a:4:{s:1:\"a\";i:15;s:1:\"b\";s:15:\"customer.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:15;a:4:{s:1:\"a\";i:16;s:1:\"b\";s:18:\"restaurants.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:16;a:4:{s:1:\"a\";i:17;s:1:\"b\";s:13:\"tables.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:17;a:4:{s:1:\"a\";i:18;s:1:\"b\";s:13:\"stocks.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:1:{i:0;i:1;}}i:18;a:3:{s:1:\"a\";i:19;s:1:\"b\";s:14:\"inventory.view\";s:1:\"c\";s:3:\"web\";}i:19;a:4:{s:1:\"a\";i:20;s:1:\"b\";s:14:\"coupons.manage\";s:1:\"c\";s:3:\"web\";s:1:\"r\";a:2:{i:0;i:1;i:1;i:2;}}}s:5:\"roles\";a:4:{i:0;a:3:{s:1:\"a\";i:1;s:1:\"b\";s:5:\"Admin\";s:1:\"c\";s:3:\"web\";}i:1;a:3:{s:1:\"a\";i:2;s:1:\"b\";s:7:\"Manager\";s:1:\"c\";s:3:\"web\";}i:2;a:3:{s:1:\"a\";i:3;s:1:\"b\";s:7:\"Cashier\";s:1:\"c\";s:3:\"web\";}i:3;a:3:{s:1:\"a\";i:4;s:1:\"b\";s:13:\"Kitchen Staff\";s:1:\"c\";s:3:\"web\";}}}', 1772030834);
 
 -- --------------------------------------------------------
 
@@ -190,6 +190,33 @@ INSERT INTO `lar_categories` (`id`, `name`, `description`, `is_active`, `status`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lar_coupons`
+--
+
+CREATE TABLE `lar_coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `type` enum('percent','amount') NOT NULL DEFAULT 'amount',
+  `value` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `starts_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `max_uses` int(10) UNSIGNED DEFAULT NULL,
+  `used` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lar_coupons`
+--
+
+INSERT INTO `lar_coupons` (`id`, `code`, `type`, `value`, `active`, `starts_at`, `expires_at`, `max_uses`, `used`, `created_at`, `updated_at`) VALUES
+(5, 'SAVE10', 'percent', 10.00, 1, '2026-02-24 15:30:00', '2026-02-25 15:30:00', 5, 1, '2026-02-24 15:30:36', '2026-02-24 15:34:41');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lar_customers`
 --
 
@@ -220,7 +247,8 @@ INSERT INTO `lar_customers` (`id`, `name`, `email`, `phone`, `address`, `status`
 (9, 'William Anderson', 'william@example.com', '01710000009', '101 Sunset Boulevard, Comilla', 1, '2026-01-04 14:35:35', '2026-01-04 14:35:35'),
 (10, 'Ava Thomas', 'ava@example.com', '01710000010', '202 Ocean Drive, Mymensingh', 1, '2026-01-04 14:35:35', '2026-01-04 14:35:35'),
 (12, 'MAHEDI HASAN', 'afranabir03@gmail.com', '01632606827', 'Narayanganj,Siddhirganj', 1, '2026-01-04 23:22:23', '2026-01-04 23:40:54'),
-(13, 'Pollob', 'pollob@example.com', '01575550883', 'Kawran Bazar,Janata tower', 1, '2026-02-16 18:30:30', '2026-02-19 19:32:35');
+(13, 'Pollob', 'pollob@example.com', '01575550883', 'Kawran Bazar,Janata tower', 1, '2026-02-16 18:30:30', '2026-02-19 19:32:35'),
+(15, 'MAHEDI HASAN', NULL, '01983581152', 'Narayanganj,Siddhirganj', 1, '2026-02-22 04:46:08', '2026-02-22 04:46:08');
 
 -- --------------------------------------------------------
 
@@ -378,7 +406,12 @@ INSERT INTO `lar_migrations` (`id`, `migration`, `batch`) VALUES
 (43, '2026_02_19_121000_add_orders_approve_permission', 21),
 (44, '2026_02_19_121100_add_orders_payment_permission', 22),
 (45, '2026_02_20_004350_alter_orders_status_add_approved', 23),
-(46, '2026_02_20_005200_sync_user_roles_from_users_table', 24);
+(46, '2026_02_20_005200_sync_user_roles_from_users_table', 24),
+(47, '2026_02_20_000100_add_inventory_view_permission', 25),
+(48, '2026_02_20_000110_add_payment_process_permission', 25),
+(49, '2026_02_20_000120_add_orders_prepare_permission', 25),
+(50, '2026_02_24_000500_add_user_id_to_orders_table', 25),
+(51, '2026_02_24_001200_create_coupons_table', 26);
 
 -- --------------------------------------------------------
 
@@ -429,6 +462,7 @@ CREATE TABLE `lar_orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `order_no` varchar(255) NOT NULL,
   `customer_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `restaurant_id` bigint(20) UNSIGNED DEFAULT NULL,
   `table_id` bigint(20) UNSIGNED DEFAULT NULL,
   `order_type` enum('dine_in','takeaway','delivery') NOT NULL DEFAULT 'dine_in',
@@ -450,13 +484,8 @@ CREATE TABLE `lar_orders` (
 -- Dumping data for table `lar_orders`
 --
 
-INSERT INTO `lar_orders` (`id`, `order_no`, `customer_id`, `restaurant_id`, `table_id`, `order_type`, `status`, `payment_status`, `payment_method`, `invoice_token`, `subtotal`, `tax`, `discount`, `total`, `note`, `ordered_at`, `created_at`, `updated_at`) VALUES
-(42, 'ORD-1771530174', 13, 11, 1, 'dine_in', 'delivered', 'paid', 'bkash', 'INV-20260220-LZVHQ', 420.00, 21.00, 20.00, 421.00, NULL, '2026-02-19 19:42:54', '2026-02-19 19:42:54', '2026-02-19 19:50:51'),
-(43, 'ORD-1771533565', 12, 11, 2, 'dine_in', 'delivered', 'paid', 'nagad', 'INV-20260220-YXCNI', 2280.00, 114.00, 0.00, 2394.00, NULL, '2026-02-19 20:39:25', '2026-02-19 20:39:25', '2026-02-19 20:42:48'),
-(44, 'ORD-1771534760', 9, 12, 4, 'dine_in', 'delivered', 'paid', 'bkash', 'INV-20260220-WRKLM', 2520.00, 126.00, 120.00, 2526.00, NULL, '2026-02-19 20:59:20', '2026-02-19 20:59:20', '2026-02-19 21:02:23'),
-(45, 'ORD-1771567218', 6, 12, 4, 'dine_in', 'approved', NULL, NULL, NULL, 5100.00, 255.00, 0.00, 5355.00, NULL, '2026-02-20 06:00:18', '2026-02-20 06:00:18', '2026-02-20 09:35:24'),
-(46, 'ORD-1771568090', 2, 11, 1, 'dine_in', 'approved', NULL, NULL, NULL, 1700.00, 85.00, 0.00, 1785.00, NULL, '2026-02-20 06:14:50', '2026-02-20 06:14:50', '2026-02-20 10:31:16'),
-(47, 'ORD-1771583296', 3, 12, 5, 'dine_in', 'delivered', 'paid', 'rocket', 'INV-20260220-6CIVM', 4250.00, 212.50, 0.00, 4462.50, NULL, '2026-02-20 10:28:16', '2026-02-20 10:28:16', '2026-02-20 10:33:27');
+INSERT INTO `lar_orders` (`id`, `order_no`, `customer_id`, `user_id`, `restaurant_id`, `table_id`, `order_type`, `status`, `payment_status`, `payment_method`, `invoice_token`, `subtotal`, `tax`, `discount`, `total`, `note`, `ordered_at`, `created_at`, `updated_at`) VALUES
+(72, 'ORD-20260224220617-139', 12, 11, 11, NULL, 'delivery', 'delivered', 'paid', 'cod', 'INV-20260224-RGSWD', 260.00, 13.00, 26.00, 247.00, NULL, '2026-02-24 16:06:17', '2026-02-24 16:06:17', '2026-02-24 16:26:05');
 
 -- --------------------------------------------------------
 
@@ -481,12 +510,7 @@ CREATE TABLE `lar_order_items` (
 --
 
 INSERT INTO `lar_order_items` (`id`, `order_id`, `menu_id`, `quantity`, `unit_price`, `total_price`, `special_request`, `created_at`, `updated_at`) VALUES
-(34, 42, 8, 1, 420.00, 420.00, NULL, '2026-02-19 19:42:54', '2026-02-19 19:42:54'),
-(35, 43, 7, 6, 380.00, 2280.00, NULL, '2026-02-19 20:39:25', '2026-02-19 20:39:25'),
-(36, 44, 8, 6, 420.00, 2520.00, NULL, '2026-02-19 20:59:20', '2026-02-19 20:59:20'),
-(37, 45, 10, 6, 850.00, 5100.00, NULL, '2026-02-20 06:00:18', '2026-02-20 06:00:18'),
-(38, 46, 10, 2, 850.00, 1700.00, NULL, '2026-02-20 06:14:50', '2026-02-20 06:14:50'),
-(39, 47, 10, 5, 850.00, 4250.00, NULL, '2026-02-20 10:28:16', '2026-02-20 10:28:16');
+(64, 72, 14, 1, 260.00, 260.00, NULL, '2026-02-24 16:06:17', '2026-02-24 16:06:17');
 
 -- --------------------------------------------------------
 
@@ -527,7 +551,18 @@ INSERT INTO `lar_permissions` (`id`, `name`, `guard_name`, `created_at`, `update
 (6, 'orders.status', 'web', NULL, NULL),
 (7, 'orders.approve', 'web', NULL, NULL),
 (8, 'orders.prepare', 'web', '2026-02-20 06:33:29', '2026-02-20 06:33:29'),
-(9, 'payment.process', 'web', '2026-02-20 09:42:40', '2026-02-20 09:42:40');
+(9, 'payment.process', 'web', '2026-02-20 09:42:40', '2026-02-20 09:42:40'),
+(10, 'orders.confirm', 'web', '2026-02-20 13:37:49', '2026-02-20 13:37:49'),
+(11, 'orders.cancel', 'web', '2026-02-20 13:37:55', '2026-02-20 13:37:55'),
+(12, 'orders.delete', 'web', '2026-02-20 13:38:07', '2026-02-20 13:38:07'),
+(13, 'menus.manage', 'web', '2026-02-20 13:38:23', '2026-02-20 13:38:23'),
+(14, 'categories.manage', 'web', '2026-02-20 13:38:28', '2026-02-20 13:38:28'),
+(15, 'customer.manage', 'web', '2026-02-20 13:38:30', '2026-02-20 13:38:30'),
+(16, 'restaurants.manage', 'web', '2026-02-20 13:38:31', '2026-02-20 13:38:31'),
+(17, 'tables.manage', 'web', '2026-02-20 13:38:33', '2026-02-20 13:38:33'),
+(18, 'stocks.manage', 'web', '2026-02-20 13:38:34', '2026-02-20 13:38:34'),
+(19, 'inventory.view', 'web', NULL, NULL),
+(20, 'coupons.manage', 'web', '2026-02-24 06:37:01', '2026-02-24 06:37:01');
 
 -- --------------------------------------------------------
 
@@ -554,10 +589,28 @@ CREATE TABLE `lar_personal_access_tokens` (
 
 INSERT INTO `lar_personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
 (1, 'App\\Models\\User', 11, 'frontend', '493e6c3c513bfe723c9b997974cfb112029c285d2191d96b31e5497eba30316b', '[\"*\"]', '2026-02-16 14:36:23', NULL, '2026-02-16 14:08:01', '2026-02-16 14:36:23'),
-(2, 'App\\Models\\User', 11, 'frontend', '6cc64ac36f75a1a52131e7f5164627c29312368e66f20a635acbc50d08c34373', '[\"*\"]', '2026-02-16 14:51:47', NULL, '2026-02-16 14:36:38', '2026-02-16 14:51:47'),
+(2, 'App\\Models\\User', 11, 'frontend', '6cc64ac36f75a1a52131e7f5164627c29312368e66f20a635acbc50d08c34373', '[\"*\"]', '2026-02-22 00:48:09', NULL, '2026-02-16 14:36:38', '2026-02-22 00:48:09'),
 (4, 'App\\Models\\User', 11, 'frontend', '9d738a16c32e096bd945dd95bd087591402d632663aca220c538126e4ec0210b', '[\"*\"]', '2026-02-16 18:21:34', NULL, '2026-02-16 18:03:58', '2026-02-16 18:21:34'),
 (5, 'App\\Models\\User', 11, 'frontend', '13cee1c61771d7dd4fc6fdc246312ae26147fe0ac4fa35745a315854475db2f0', '[\"*\"]', '2026-02-16 18:53:18', NULL, '2026-02-16 18:21:42', '2026-02-16 18:53:18'),
-(6, 'App\\Models\\User', 11, 'frontend', '924895e241d18e3fe0a89834cb1a77c5606db499a3cdced24766cbf1b8ddf8f6', '[\"*\"]', '2026-02-17 04:50:39', NULL, '2026-02-17 04:49:08', '2026-02-17 04:50:39');
+(7, 'App\\Models\\User', 11, 'frontend', 'f346c99b0837e3b895e5c5a659516afc5d06d2f6a751e6e578a034f961f26e6c', '[\"*\"]', '2026-02-23 15:06:17', NULL, '2026-02-22 00:10:40', '2026-02-23 15:06:17'),
+(10, 'App\\Models\\User', 11, 'frontend', 'c75c87787e3ba49d0a34aa3b453ea3b468c9149deb209d9c2d280076b1c5aeb8', '[\"*\"]', '2026-02-23 15:38:56', NULL, '2026-02-23 15:06:44', '2026-02-23 15:38:56'),
+(11, 'App\\Models\\User', 11, 'frontend', '7d5b82465cf07f3c83c85a6bc70c05a4cc2332c2ab4922cd174110e22f3636e9', '[\"*\"]', '2026-02-23 15:51:11', NULL, '2026-02-23 15:38:59', '2026-02-23 15:51:11'),
+(12, 'App\\Models\\User', 11, 'frontend', '5b2e9c639cae326b9c9007b28f46ab1fee901fc0b16655d4363cdf6b4d96fe1d', '[\"*\"]', '2026-02-23 16:01:34', NULL, '2026-02-23 15:51:18', '2026-02-23 16:01:34'),
+(13, 'App\\Models\\User', 11, 'frontend', '8c2ecde9a5ad8ad49d54d94b78ce09f15c995d074d679eadbcaaff456d3f4336', '[\"*\"]', '2026-02-23 16:03:21', NULL, '2026-02-23 16:01:38', '2026-02-23 16:03:21'),
+(14, 'App\\Models\\User', 11, 'frontend', '218b2e4726fa559e12999f785a3b8e0b9290aa4efa3e3ab7eef8faa5078b6693', '[\"*\"]', '2026-02-23 16:03:30', NULL, '2026-02-23 16:03:25', '2026-02-23 16:03:30'),
+(15, 'App\\Models\\User', 11, 'frontend', '9a45152b3f1454d0227b41072312cb1ae706cb9dd9c38af26e599376b7bbd53d', '[\"*\"]', '2026-02-23 16:09:25', NULL, '2026-02-23 16:03:34', '2026-02-23 16:09:25'),
+(16, 'App\\Models\\User', 11, 'frontend', '0c6d9d4ad8101841e7f2ba2e55fb5436bac9e24fe326568f2c3530c87a51f4da', '[\"*\"]', '2026-02-23 16:11:40', NULL, '2026-02-23 16:10:09', '2026-02-23 16:11:40'),
+(17, 'App\\Models\\User', 11, 'frontend', '606903666dbbffed43699e38b8e3465e874738f8f2fb4d2991c4880d3d907c8c', '[\"*\"]', '2026-02-23 16:14:30', NULL, '2026-02-23 16:12:26', '2026-02-23 16:14:30'),
+(18, 'App\\Models\\User', 11, 'frontend', 'e03c8cb5ea751ba9d83500d1bb1403c688234b30e700faf43d506f9b40ca4732', '[\"*\"]', '2026-02-23 16:15:00', NULL, '2026-02-23 16:14:41', '2026-02-23 16:15:00'),
+(19, 'App\\Models\\User', 11, 'frontend', '9f1af6e6c51db8f44df023f96c04f3d0db40bb8243f9d7259eabf1cc51446061', '[\"*\"]', '2026-02-23 16:17:58', NULL, '2026-02-23 16:15:04', '2026-02-23 16:17:58'),
+(20, 'App\\Models\\User', 11, 'frontend', 'c7215c771ec9ae7f0aa5729ae05fa062f6f42f7e9543335043504d1e07ceb13e', '[\"*\"]', '2026-02-23 16:19:14', NULL, '2026-02-23 16:18:01', '2026-02-23 16:19:14'),
+(21, 'App\\Models\\User', 11, 'frontend', '16b470270343cf8eff89fbf9ee54f2e15835ce0e27dabbf17e836f89ce7124cf', '[\"*\"]', '2026-02-23 16:21:59', NULL, '2026-02-23 16:19:17', '2026-02-23 16:21:59'),
+(22, 'App\\Models\\User', 11, 'frontend', '011afd0df4368052f0451d3b15e0e9c940d54ff171e1fe190d0dc25e7aa1daeb', '[\"*\"]', '2026-02-23 16:22:07', NULL, '2026-02-23 16:22:02', '2026-02-23 16:22:07'),
+(23, 'App\\Models\\User', 11, 'frontend', '88bebf5905ae7e96efca5245b69d2f0338e1b2f6a0ef28452c7538a5d75ed7e0', '[\"*\"]', '2026-02-23 16:22:14', NULL, '2026-02-23 16:22:12', '2026-02-23 16:22:14'),
+(24, 'App\\Models\\User', 11, 'frontend', 'cc0055ac54b742356338a47d6b4f7cdea10634a2b8eb5cffd7d669d2a237d716', '[\"*\"]', '2026-02-23 16:22:30', NULL, '2026-02-23 16:22:17', '2026-02-23 16:22:30'),
+(25, 'App\\Models\\User', 11, 'frontend', 'bfcf1a2bca4bfeec2eb0f630b60f64fb1e449e2a44777b38ac043d2c004f7a85', '[\"*\"]', '2026-02-23 16:47:51', NULL, '2026-02-23 16:22:33', '2026-02-23 16:47:51'),
+(31, 'App\\Models\\User', 11, 'frontend', 'ab92b7af1df831fd8d47509ceedc27c513644e13f5039a57c7f3dacd2b29be62', '[\"*\"]', '2026-02-23 18:04:34', NULL, '2026-02-23 17:57:54', '2026-02-23 18:04:34'),
+(55, 'App\\Models\\User', 11, 'frontend', '03acfe7c894e014571bcf7937e099865027ecfa196e95c4ba327a2c7d09a8c23', '[\"*\"]', '2026-02-24 16:26:09', NULL, '2026-02-24 16:16:51', '2026-02-24 16:26:09');
 
 -- --------------------------------------------------------
 
@@ -675,10 +728,10 @@ CREATE TABLE `lar_restaurant_tables` (
 
 INSERT INTO `lar_restaurant_tables` (`id`, `restaurant_id`, `name`, `capacity`, `status`, `created_at`, `updated_at`) VALUES
 (1, 11, 'Table-1', 2, 'occupied', '2026-02-18 18:33:03', '2026-02-20 06:14:50'),
-(2, 11, 'Table-2', 6, 'available', '2026-02-18 18:33:30', '2026-02-19 20:42:48'),
+(2, 11, 'Table-2', 6, 'available', '2026-02-18 18:33:30', '2026-02-22 04:56:16'),
 (3, 11, 'Table-3', 4, 'occupied', '2026-02-18 18:33:47', '2026-02-18 18:35:37'),
 (4, 12, 'Tab-1', 6, 'occupied', '2026-02-19 20:58:19', '2026-02-20 06:00:18'),
-(5, 12, 'Tab-2', 5, 'available', '2026-02-20 10:25:13', '2026-02-20 10:33:27');
+(5, 12, 'Tab-2', 5, 'available', '2026-02-20 10:25:13', '2026-02-22 05:22:10');
 
 -- --------------------------------------------------------
 
@@ -723,7 +776,6 @@ INSERT INTO `lar_role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
-(1, 4),
 (2, 1),
 (2, 2),
 (2, 3),
@@ -737,10 +789,21 @@ INSERT INTO `lar_role_has_permissions` (`permission_id`, `role_id`) VALUES
 (6, 1),
 (6, 2),
 (6, 4),
-(7, 1),
 (7, 2),
 (8, 4),
-(9, 3);
+(9, 3),
+(10, 1),
+(11, 1),
+(11, 2),
+(12, 1),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(20, 1),
+(20, 2);
 
 -- --------------------------------------------------------
 
@@ -762,7 +825,7 @@ CREATE TABLE `lar_sessions` (
 --
 
 INSERT INTO `lar_sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('iRedss5T0QG4y7AlndXowWUBXzkVJBwKB0T3lIbK', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiaWM1Y25kMTNVdkFTYlRQYk5XZmY2Ylh5U2hneG5PbVo4bk05TWIwYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjMxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZGFzaGJvYXJkIjtzOjU6InJvdXRlIjtzOjk6ImRhc2hib2FyZCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjk7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcxNTgzNjI3O319', 1771583650);
+('4y45cvJejb44Chdgrf0qYN0Av02KRkRWjTsjjbYM', 11, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWG1IMFVEeXVzQlIzeXZFU1lJNFdRZVVvZ1lLZ2NXdkpJNThTQ3JFbiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjM5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvb3JkZXJzLzcyL2ludm9pY2UiO3M6NToicm91dGUiO3M6MTQ6Im9yZGVycy5pbnZvaWNlIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTE7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzcxOTUwMzUzO319', 1771950365);
 
 -- --------------------------------------------------------
 
@@ -784,20 +847,20 @@ CREATE TABLE `lar_stocks` (
 --
 
 INSERT INTO `lar_stocks` (`id`, `menu_id`, `current_quantity`, `unit`, `created_at`, `updated_at`) VALUES
-(7, 1, 10, 'pcs', '2026-02-19 19:26:48', '2026-02-19 19:26:48'),
-(8, 2, 5, 'pcs', '2026-02-19 19:27:14', '2026-02-19 19:27:14'),
+(7, 1, 7, 'pcs', '2026-02-19 19:26:48', '2026-02-24 05:12:59'),
+(8, 2, 8, 'pcs', '2026-02-19 19:27:14', '2026-02-23 18:06:27'),
 (9, 3, 6, 'pcs', '2026-02-19 19:27:31', '2026-02-19 19:27:31'),
 (10, 4, 8, 'pcs', '2026-02-19 19:27:45', '2026-02-19 19:27:45'),
-(11, 5, 3, 'pcs', '2026-02-19 19:28:02', '2026-02-19 19:28:02'),
+(11, 5, 5, 'pcs', '2026-02-19 19:28:02', '2026-02-24 15:46:41'),
 (12, 6, 5, 'pcs', '2026-02-19 19:28:12', '2026-02-19 19:28:12'),
 (13, 7, 4, 'pcs', '2026-02-19 19:28:22', '2026-02-19 20:42:48'),
-(14, 8, 0, 'pcs', '2026-02-19 19:28:34', '2026-02-19 21:02:23'),
-(15, 9, 4, 'pcs', '2026-02-19 19:29:38', '2026-02-19 19:29:38'),
-(16, 10, 4, 'pcs', '2026-02-19 19:30:22', '2026-02-20 10:33:27'),
+(14, 8, 8, 'pcs', '2026-02-19 19:28:34', '2026-02-24 05:17:27'),
+(15, 9, 10, 'pcs', '2026-02-19 19:29:38', '2026-02-24 15:46:50'),
+(16, 10, 4, 'pcs', '2026-02-19 19:30:22', '2026-02-20 13:40:01'),
 (17, 11, 12, 'pcs', '2026-02-19 19:30:32', '2026-02-19 19:30:32'),
-(18, 12, 2, 'pcs', '2026-02-19 19:31:03', '2026-02-19 19:31:03'),
-(19, 13, 2, 'pcs', '2026-02-19 19:31:14', '2026-02-19 19:31:14'),
-(20, 14, 7, 'pcs', '2026-02-19 19:31:29', '2026-02-19 19:31:29');
+(18, 12, 5, 'pcs', '2026-02-19 19:31:03', '2026-02-24 15:48:59'),
+(19, 13, 5, 'pcs', '2026-02-19 19:31:14', '2026-02-24 15:48:47'),
+(20, 14, 4, 'pcs', '2026-02-19 19:31:29', '2026-02-24 16:26:05');
 
 -- --------------------------------------------------------
 
@@ -939,6 +1002,13 @@ ALTER TABLE `lar_categories`
   ADD UNIQUE KEY `lar_categories_name_unique` (`name`);
 
 --
+-- Indexes for table `lar_coupons`
+--
+ALTER TABLE `lar_coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `lar_coupons_code_unique` (`code`);
+
+--
 -- Indexes for table `lar_customers`
 --
 ALTER TABLE `lar_customers`
@@ -998,7 +1068,8 @@ ALTER TABLE `lar_orders`
   ADD UNIQUE KEY `lar_orders_order_no_unique` (`order_no`),
   ADD KEY `lar_orders_customer_id_status_index` (`customer_id`,`status`),
   ADD KEY `lar_orders_restaurant_id_ordered_at_index` (`restaurant_id`,`ordered_at`),
-  ADD KEY `lar_orders_table_id_foreign` (`table_id`);
+  ADD KEY `lar_orders_table_id_foreign` (`table_id`),
+  ADD KEY `lar_orders_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `lar_order_items`
@@ -1151,10 +1222,16 @@ ALTER TABLE `lar_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `lar_coupons`
+--
+ALTER TABLE `lar_coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `lar_customers`
 --
 ALTER TABLE `lar_customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `lar_failed_jobs`
@@ -1178,31 +1255,31 @@ ALTER TABLE `lar_menus`
 -- AUTO_INCREMENT for table `lar_migrations`
 --
 ALTER TABLE `lar_migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `lar_orders`
 --
 ALTER TABLE `lar_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `lar_order_items`
 --
 ALTER TABLE `lar_order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `lar_permissions`
 --
 ALTER TABLE `lar_permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `lar_personal_access_tokens`
 --
 ALTER TABLE `lar_personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `lar_products`
@@ -1286,7 +1363,8 @@ ALTER TABLE `lar_model_has_roles`
 ALTER TABLE `lar_orders`
   ADD CONSTRAINT `lar_orders_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `lar_customers` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `lar_orders_restaurant_id_foreign` FOREIGN KEY (`restaurant_id`) REFERENCES `lar_restaurants` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `lar_orders_table_id_foreign` FOREIGN KEY (`table_id`) REFERENCES `lar_restaurant_tables` (`id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `lar_orders_table_id_foreign` FOREIGN KEY (`table_id`) REFERENCES `lar_restaurant_tables` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `lar_orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `lar_users` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `lar_order_items`

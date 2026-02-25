@@ -26,8 +26,8 @@ Permission Control System
                             <td class="fw-semibold">
                                 {{ $m['label'] }}
                                 <div class="mt-2 d-flex gap-2">
-                                    <button class="btn btn-xs btn-success mark-row" data-perm="{{ $m['key'] }}">Mark All</button>
-                                    <button class="btn btn-xs btn-danger unmark-row" data-perm="{{ $m['key'] }}">Unmark All</button>
+                                    <button class="btn btn-xs btn-dark mark-row" data-perm="{{ $m['key'] }}">Mark All</button>
+                                    <button class="btn btn-xs unmark-row" style="background:#FF7F50; border-color:#FF7F50; color:#000;" data-perm="{{ $m['key'] }}">Unmark All</button>
                                 </div>
                             </td>
                             @foreach($roles as $role)

@@ -12,7 +12,7 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, ...$roles)
     {
         $user = Auth::user();
-        if (!$user) {
+        if (! $user) {
             abort(403);
         }
         $userRoles = DB::table('model_has_roles')
@@ -23,6 +23,12 @@ class RoleMiddleware
             ->toArray();
         foreach ($roles as $r) {
             if (in_array($r, $userRoles, true)) {
+                return $next($request);
+            }
+        }
+        $stored = strtolower(trim($user->role ?? ''));
+        foreach ($roles as $r) {
+            if (strtolower($r) === $stored) {
                 return $next($request);
             }
         }

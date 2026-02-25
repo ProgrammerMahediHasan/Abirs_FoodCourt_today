@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Cashier\Payment;
 
 class Order extends Model
@@ -16,11 +16,23 @@ class Order extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'order_no', 'customer_id', 'restaurant_id', 'table_id', 'order_type',
-        'status', 'subtotal', 'tax', 'discount', 'total', 'note', 'ordered_at',
-        'payment_status', 'payment_method', 'invoice_token'
+        'order_no',
+        'customer_id',
+        'restaurant_id',
+        'table_id',
+        'order_type',
+        'status',
+        'subtotal',
+        'tax',
+        'discount',
+        'total',
+        'note',
+        'ordered_at',
+        'payment_status',
+        'payment_method',
+        'invoice_token',
+        'user_id',
     ];
-
 
     /**
      * The attributes that should be cast.
@@ -37,7 +49,7 @@ class Order extends Model
         'completed_at' => 'datetime',
         'status' => 'string',
         'order_type' => 'string',
-        'payment_status' => 'string'
+        'payment_status' => 'string',
     ];
 
     /**
@@ -50,7 +62,7 @@ class Order extends Model
         'estimated_time',
         'completed_at',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -133,7 +145,7 @@ class Order extends Model
      */
     public static function generateOrderNo(): string
     {
-        return 'ORD-' . now()->timestamp;
+        return 'ORD-'.now()->timestamp;
     }
 
     /**
@@ -280,7 +292,7 @@ class Order extends Model
         $this->update([
             'subtotal' => $subtotal,
             'tax' => $tax,
-            'total' => $total
+            'total' => $total,
         ]);
 
         return $this;
@@ -293,7 +305,7 @@ class Order extends Model
     {
         $validStatuses = ['pending', 'confirmed', 'preparing', 'ready', 'approved', 'delivered', 'cancelled'];
 
-        if (!in_array($newStatus, $validStatuses)) {
+        if (! in_array($newStatus, $validStatuses)) {
             return false;
         }
 
@@ -315,7 +327,7 @@ class Order extends Model
             'preparing' => ['class' => 'badge bg-info', 'icon' => 'utensils'],
             'ready' => ['class' => 'badge bg-success', 'icon' => 'check-double'],
             'delivered' => ['class' => 'badge bg-dark', 'icon' => 'truck'],
-            'cancelled' => ['class' => 'badge bg-danger', 'icon' => 'times-circle']
+            'cancelled' => ['class' => 'badge bg-danger', 'icon' => 'times-circle'],
         ];
 
         $config = $statusConfig[$this->status] ?? ['class' => 'badge bg-secondary', 'icon' => 'question'];
@@ -336,7 +348,7 @@ class Order extends Model
         $typeConfig = [
             'dine_in' => ['class' => 'badge bg-primary', 'icon' => 'utensils'],
             'takeaway' => ['class' => 'badge bg-success', 'icon' => 'box'],
-            'delivery' => ['class' => 'badge bg-info', 'icon' => 'truck']
+            'delivery' => ['class' => 'badge bg-info', 'icon' => 'truck'],
         ];
 
         $config = $typeConfig[$this->order_type] ?? ['class' => 'badge bg-secondary', 'icon' => 'question'];
@@ -354,7 +366,7 @@ class Order extends Model
      */
     public function getFormattedTotal(): string
     {
-        return '৳' . number_format($this->total, 2);
+        return '৳'.number_format($this->total, 2);
     }
 
     /**
@@ -402,7 +414,7 @@ class Order extends Model
             'total_revenue' => $totalRevenue,
             'today_revenue' => $todayRevenue,
             'pending_orders' => $pendingOrders,
-            'avg_order_value' => $totalOrders > 0 ? $totalRevenue / $totalOrders : 0
+            'avg_order_value' => $totalOrders > 0 ? $totalRevenue / $totalOrders : 0,
         ];
     }
 
@@ -448,4 +460,5 @@ class Order extends Model
     public function totalQuantity(): int
     {
         return $this->items()->sum('quantity');
-    }};
+    }
+}

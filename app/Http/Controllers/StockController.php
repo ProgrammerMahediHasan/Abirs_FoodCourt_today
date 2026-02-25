@@ -57,4 +57,23 @@ class StockController extends Controller
         $stock->delete();
         return redirect()->route('stocks.index')->with('success', 'Stock deleted successfully.');
     }
+
+    public function restock(Request $request, Stock $stock)
+    {
+        $data = $request->validate([
+            'quantity' => ['required', 'numeric', 'min:0.01'],
+            'unit' => ['required', 'string', 'max:50'],
+            'reference' => ['nullable', 'string', 'max:100'],
+        ]);
+
+        if ($stock->unit && $data['unit'] && strtolower($stock->unit) !== strtolower($data['unit'])) {
+            return redirect()->back()->withErrors('Unit mismatch for this stock item.');
+        }
+
+        $stock->current_quantity = ($stock->current_quantity ?? 0) + (float) $data['quantity'];
+        $stock->unit = $stock->unit ?: $data['unit'];
+        $stock->save();
+
+        return redirect()->route('stocks.index')->with('success', 'Stock increased successfully.');
+    }
 }
